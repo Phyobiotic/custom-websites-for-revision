@@ -1,10 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Topic 9 — Logs & Exponentials Study Guide</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -951,8 +954,7 @@
 </div>
 
 <script>
-/* ========================= KaTeX render ========================= */
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", function () {
   if (window.renderMathInElement) {
     renderMathInElement(document.body, {
       delimiters: [
@@ -962,6 +964,23 @@ window.addEventListener("DOMContentLoaded", function () {
       throwOnError: false
     });
   }
+});
+/* ========================= KaTeX render ========================= */
+window.addEventListener("DOMContentLoaded", function () {
+  function renderAllMath() {
+    if (window.renderMathInElement) {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: "\\[", right: "\\]", display: true},
+          {left: "\\(", right: "\\)", display: false}
+        ],
+        throwOnError: false
+      });
+    }
+  }
+  renderAllMath();
+  window.setTimeout(renderAllMath, 250);
+  window.setTimeout(renderAllMath, 1000);
   initQuizzes();
   initMistakeDeck();
   initFlashcards();

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Study Modules</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #FBFAF6;
+      --paper-2: #F4F1E8;
+      --ink: #1c2733;
+      --ink-soft: #3f4c59;
+      --line: #dcd6c8;
+      --navy: #1f4e6b;
+      --navy-2: #2c6a90;
+      --teal: #0f7a6b;
+      --crimson: #9c3550;
+      --navy-bg: #eaf1f6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Newsreader", Georgia, serif;
+      padding: 24px;
+    }
+
+    .page {
+      width: min(100%, 980px);
+      margin: 0;
+    }
+
+    .module-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .module-card {
+      display: block;
+      text-decoration: none;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 20px 22px;
+      border-radius: 6px;
+      width: calc(25% - 12px);
+      min-width: 180px;
+    }
+
+    .module-card h2 {
+      font-family: "Inter", sans-serif;
+      font-size: 20px;
+      margin: 0 0 6px;
+      color: var(--navy);
+    }
+
+    .module-card p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="module-grid">
+      <a class="module-card" href="logs_study_guide.html">
+        <h2>logarythms</h2>
+        <p>Logs and exponentials study guide.</p>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
