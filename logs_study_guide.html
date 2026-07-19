@@ -6,8 +6,8 @@
 <title>Topic 9 — Logs & Exponentials Study Guide</title>
 
 <link rel="stylesheet" href="katex/katex.min.css">
-<script src="katex/katex.min.js"></script>
-<script src="katex-render.js"></script>
+<script defer src="katex/katex.min.js"></script>
+<script defer src="katex/auto-render.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -117,6 +117,18 @@
   figure.plot figcaption{font-family:"Inter",sans-serif;font-size:13px;color:var(--ink-soft);margin-top:6px}
   .plot-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
   .plot-row figure{flex:1 1 240px;min-width:220px;margin:8px 0}
+
+  /* ============ MOCK PAPER LINKS ============ */
+  .mock-links{display:flex;flex-direction:column;gap:10px;margin:18px 0}
+  .mock-link{
+    display:flex;align-items:center;gap:16px;padding:14px 18px;
+    border:1px solid var(--line);border-radius:3px;background:#fff;
+    text-decoration:none;color:var(--ink);transition:border-color .15s,background .15s;
+  }
+  .mock-link:hover{border-color:var(--navy-2);background:var(--navy-bg)}
+  .mock-num{font-family:"Inter",sans-serif;font-weight:700;font-size:14px;min-width:72px;color:var(--navy)}
+  .mock-desc{font-family:"Inter",sans-serif;font-size:13px;color:var(--ink-soft);flex:1}
+  .mock-open{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--navy-2);white-space:nowrap}
 
   hr.soft{border:none;border-top:1px dashed var(--line);margin:30px 0}
   .checklist{list-style:none;padding-left:0}
@@ -238,6 +250,8 @@
     .flashcard{height:180px}
   }
 </style>
+</head>
+<body>
 
 <button class="toc-toggle" id="toc-toggle" onclick="toggleToc()" aria-label="Toggle contents menu">
   <span class="bars"><span></span><span></span><span></span></span>
@@ -265,12 +279,20 @@
   <a class="part" href="#p7">7 · Simultaneous eqns</a>
   <a href="#p7-2">Third combination</a>
   <a class="part" href="#p8">8 · Applications</a>
+  <a class="part" href="#p85">8.5 · Practice paper types</a>
+  <a href="#p85-mixedbases">Mixed bases</a>
+  <a href="#p85-expressing">Expressing p &amp; q</a>
+  <a href="#p85-hence">Hence questions</a>
+  <a href="#p85-graphical">Graphical method</a>
+  <a href="#p85-newton">Newton's cooling</a>
+  <a href="#p85-show">Show that proofs</a>
   <a class="part" href="#p9">9 · Graphs</a>
   <a href="#p9-sketch">Sketching method</a>
   <a href="#p9-practice">Practice sketcher</a>
   <a class="part" href="#p10">10 · Exam cheat-sheet</a>
   <a href="#p10-flash">Formula flashcards</a>
   <a class="part" href="#p11">11 · Mixed final review</a>
+  <a class="part" href="#mock-papers">12 · Mock papers (×5)</a>
 </nav>
 
 <main>
@@ -786,6 +808,176 @@
 </div>
 </section>
 
+<!-- ============================ PART 8.5 — NEW QUESTION TYPES FROM PRACTICE PAPERS ============================ -->
+<section id="p85">
+<h2 class="part"><span class="n">§8.5</span> Question types from your practice papers</h2>
+<p>These patterns appear in your actual test papers but weren't in the worksheets. Each one needs a slightly different opening move — and that's exactly what trips people up.</p>
+
+<h3 id="p85-mixedbases">8.5.1 Mixed bases in one log equation</h3>
+<p>When a single equation has logs of <em>different</em> bases (e.g. both \(\log_4\) and \(\log_2\)), use change-of-base to convert everything to the same base first, then apply the laws as normal.</p>
+<div class="method box">
+  <span class="lab">Strategy</span>
+  Pick whichever base the most logs already use. Convert every other log to that base with \(\log_a x = \dfrac{\log_b x}{\log_b a}\). Simplify, condense, then solve.
+</div>
+<span class="interactive-tag">Try it before you look</span>
+<div class="reveal-box" id="rv-mixedbases">
+  <span class="lab">Worked example — 2A Q1</span>
+  <p>Solve \(\log_4(4x-7)+\log_2 x = 1+3\log_4(x-1)\).</p>
+  <textarea class="try-first" placeholder="Notice the mixed bases: log_4 and log_2. Convert log_2 x to base 4 first..."></textarea>
+  <div class="reveal-step" data-n="1"><span class="num">1</span><span>Convert \(\log_2 x\) to base 4: \(\log_2 x = \dfrac{\log_4 x}{\log_4 2} = \dfrac{\log_4 x}{1/2} = 2\log_4 x\). Also, \(1 = \log_4 4\).</span></div>
+  <div class="reveal-step" data-n="2"><span class="num">2</span><span>Equation becomes all base 4: \(\log_4(4x-7) + 2\log_4 x = \log_4 4 + 3\log_4(x-1)\).</span></div>
+  <div class="reveal-step" data-n="3"><span class="num">3</span><span>Condense each side: \(\log_4\!\big[x^2(4x-7)\big] = \log_4\!\big[4(x-1)^3\big]\).</span></div>
+  <div class="reveal-step" data-n="4"><span class="num">4</span><span>Arguments equal: \(x^2(4x-7)=4(x-1)^3\). Expand: \(4x^3-7x^2=4x^3-12x^2+12x-4\).</span></div>
+  <div class="reveal-step" data-n="5"><span class="num">5</span><span>Simplify: \(5x^2-12x+4=0 \Rightarrow (5x-2)(x-2)=0 \Rightarrow x=2\) or \(x=\tfrac25\).</span></div>
+  <div class="reveal-step" data-n="6"><span class="num">6</span><span>Validity: need \(4x-7>0\Rightarrow x>\tfrac74\). So \(x=\tfrac25\) is rejected. Answer: \(x=2\).</span></div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="revealNext('rv-mixedbases')">Show next step</button>
+    <button class="btn secondary" onclick="revealAll('rv-mixedbases')">Show all</button>
+    <button class="btn secondary" onclick="revealReset('rv-mixedbases')">Reset</button>
+  </div>
+</div>
+<div class="tip box"><span class="lab">Key conversions to memorise</span>\(\log_2 x = 2\log_4 x\) and \(\log_{16} x = \tfrac{1}{2}\log_4 x\) — since \(\log_4 2 = \tfrac12\) and \(\log_4 16 = 2\). These two crop up constantly in RI papers.</div>
+
+<h3 id="p85-expressing">8.5.2 Expressing in terms of p and q (different base)</h3>
+<p>Given \(\log_8 x = p\) and \(\log_8 y = q\), find things like \(\log_4(x/y)\). The trap: you need to express \(\log_4\) in terms of \(\log_8\). Use change-of-base to bridge them.</p>
+<div class="box formula">
+  \[\log_4 x = \frac{\log_8 x}{\log_8 4} = \frac{p}{\log_8 4}\]
+  <p style="margin:.4em 0 0">Find \(\log_8 4\) first: since \(8 = 2^3\) and \(4 = 2^2\), we get \(\log_8 4 = \dfrac{2}{3}\). So \(\log_4 x = \dfrac{p}{2/3} = \dfrac{3p}{2}\).</p>
+</div>
+<span class="interactive-tag">Try it before you look</span>
+<div class="reveal-box" id="rv-expressing">
+  <span class="lab">Worked example — 2A Q3(ii)</span>
+  <p>Given \(\log_8 x = p\) and \(\log_8 y = q\), find \(\log_4\!\Big(\dfrac{x}{y}\Big)\) in terms of \(p\) and \(q\).</p>
+  <textarea class="try-first" placeholder="Find log_8(4) first, then use change-of-base to convert log_4 → log_8..."></textarea>
+  <div class="reveal-step" data-n="1"><span class="num">1</span><span>\(\log_4\!\Big(\dfrac{x}{y}\Big) = \log_4 x - \log_4 y\) (quotient law).</span></div>
+  <div class="reveal-step" data-n="2"><span class="num">2</span><span>Convert to base 8: \(\log_4 x = \dfrac{\log_8 x}{\log_8 4} = \dfrac{p}{2/3} = \dfrac{3p}{2}\). Similarly \(\log_4 y = \dfrac{3q}{2}\).</span></div>
+  <div class="reveal-step" data-n="3"><span class="num">3</span><span>Answer: \(\log_4\!\Big(\dfrac{x}{y}\Big) = \dfrac{3p}{2} - \dfrac{3q}{2} = \dfrac{3(p-q)}{2}\).</span></div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="revealNext('rv-expressing')">Show next step</button>
+    <button class="btn secondary" onclick="revealAll('rv-expressing')">Show all</button>
+    <button class="btn secondary" onclick="revealReset('rv-expressing')">Reset</button>
+  </div>
+</div>
+
+<h3 id="p85-hence">8.5.3 "Hence" questions — using a previous answer</h3>
+<p>A two-part question where part (ii) says "hence express \(\log_8 72\) in terms of \(x\)". This means your answer from part (i) must be substituted or used — don't start from scratch.</p>
+<span class="interactive-tag">Try it before you look</span>
+<div class="reveal-box" id="rv-hence">
+  <span class="lab">Worked example — 2B Q2</span>
+  <p>(i) Solve \(6(2^x)-15(2^{-x})=3\). (ii) Hence express \(\log_8 72\) in terms of \(x\).</p>
+  <textarea class="try-first" placeholder="For (i) multiply through by 2^x to clear the negative exponent, then let u = 2^x..."></textarea>
+  <div class="reveal-step" data-n="1"><span class="num">1</span><span>(i) Multiply through by \(2^x\): \(6(2^x)^2 - 3(2^x) - 15 = 0\). Let \(u=2^x\): \(2u^2 - u - 5 = 0\)... wait, let's redo cleanly: \(6(2^x) - 15(2^{-x}) = 3\). Multiply by \(2^x\): \(6(2^{2x}) - 3(2^x) - 15 = 0 \Rightarrow 2(2^{2x}) - (2^x) - 5 = 0\).</span></div>
+  <div class="reveal-step" data-n="2"><span class="num">2</span><span>Let \(u=2^x\): \(2u^2-u-5=0 \Rightarrow (2u-5)(u+1)=0 \Rightarrow u=\tfrac52\) (reject \(u=-1\)).</span></div>
+  <div class="reveal-step" data-n="3"><span class="num">3</span><span>So \(2^x = \tfrac52 \Rightarrow x = \log_2\!\tfrac52 = \dfrac{\lg(5/2)}{\lg 2}\).</span></div>
+  <div class="reveal-step" data-n="4"><span class="num">4</span><span>(ii) Since \(2^x = 3\) (from the solution, \(x = \log_2 3\)): \(\log_8 72 = \log_8(9\times 8) = \log_8 9 + \log_8 8 = \log_8 3^2 + 1 = 2\log_8 3 + 1\). Since \(\log_8 3 = \dfrac{\log_2 3}{\log_2 8} = \dfrac{x}{3}\), we get \(\log_8 72 = \dfrac{2x}{3} + 1\).</span></div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="revealNext('rv-hence')">Show next step</button>
+    <button class="btn secondary" onclick="revealAll('rv-hence')">Show all</button>
+    <button class="btn secondary" onclick="revealReset('rv-hence')">Reset</button>
+  </div>
+</div>
+<div class="tip box"><span class="lab">Pattern for "hence" log questions</span>If you solved \(a^x = k\), then \(\log_b k = \dfrac{x\log_b a}{1}\). Factor the target number into pieces involving \(k\) and simple powers, then use the laws to express each piece in terms of \(x\).</div>
+
+<h3 id="p85-graphical">8.5.4 Graphical solutions — inserting an extra line</h3>
+<p>These ask you to rearrange an equation until one side matches the curve you've already sketched, then identify what straight line (or other curve) to draw. The intersections of the two graphs give the solutions.</p>
+<div class="method box">
+  <span class="lab">Strategy</span>
+  <ol class="steps">
+    <li>You have a sketched curve \(y = f(x)\) (e.g. \(y = \ln(5-3x)\)).</li>
+    <li>The equation to solve is \(g(x) = h(x)\).</li>
+    <li>Rearrange so one side = \(f(x)\), leaving the other side as a simple function: \(f(x) = \text{line or simple curve}\).</li>
+    <li>Draw that simple function on the same axes. Each intersection = one solution.</li>
+  </ol>
+</div>
+<span class="interactive-tag">Try it before you look</span>
+<div class="reveal-box" id="rv-graphical">
+  <span class="lab">Worked example — CT Paper Q3(b)</span>
+  <p>The graph of \(y=\ln(5-3x)\) is already drawn. Find which additional line to draw to solve \(\dfrac{1}{(5-3x)^2}=e^{4x+5}\), and state the number of solutions.</p>
+  <textarea class="try-first" placeholder="Take ln of both sides, then rearrange to get ln(5-3x) = something simple..."></textarea>
+  <div class="reveal-step" data-n="1"><span class="num">1</span><span>Take \(\ln\) of both sides: \(\ln\!\Big[\dfrac{1}{(5-3x)^2}\Big] = 4x+5\).</span></div>
+  <div class="reveal-step" data-n="2"><span class="num">2</span><span>Left side: \(\ln(5-3x)^{-2} = -2\ln(5-3x)\). So: \(-2\ln(5-3x) = 4x+5\).</span></div>
+  <div class="reveal-step" data-n="3"><span class="num">3</span><span>Divide by \(-2\): \(\ln(5-3x) = -2x - \tfrac{5}{2}\). This matches the curve \(y=\ln(5-3x)\).</span></div>
+  <div class="reveal-step" data-n="4"><span class="num">4</span><span>Draw the straight line \(y = -2x - \tfrac{5}{2}\) on the same axes. Count intersections with \(y=\ln(5-3x)\).</span></div>
+  <div class="reveal-step" data-n="5"><span class="num">5</span><span>From the sketch: the line intersects the curve at 2 points → <strong>2 solutions</strong>.</span></div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="revealNext('rv-graphical')">Show next step</button>
+    <button class="btn secondary" onclick="revealAll('rv-graphical')">Show all</button>
+    <button class="btn secondary" onclick="revealReset('rv-graphical')">Reset</button>
+  </div>
+</div>
+<div class="warn box"><span class="lab">Common error</span>Students rearrange the equation but then draw the line \(y = 4x+5\) (the right-hand side before rearranging). Always rearrange until one side is exactly \(f(x)\) — the function you've already drawn — then draw the <em>other</em> side.</div>
+
+<h3 id="p85-newton">8.5.5 Newton's Law of Cooling</h3>
+<p>Model: \(T = T_\infty + D_0 e^{-kt}\) where \(T_\infty\) is the surrounding (room) temperature, \(D_0\) is the initial temperature <em>difference</em> (not the initial temperature), and \(k > 0\).</p>
+<div class="box formula">
+  <span class="lab">Steps for any Newton's Cooling question</span>
+  <ol class="steps">
+    <li>At \(t=0\): \(T=T_\infty + D_0\), so \(D_0 = T(0) - T_\infty\).</li>
+    <li>At the second data point: substitute \(t,T\) to get \(e^{-kt} = \dfrac{T - T_\infty}{D_0}\), then \(k = -\dfrac{1}{t}\ln\!\Big(\dfrac{T-T_\infty}{D_0}\Big)\).</li>
+    <li>For a target temperature: set \(T = \text{target}\), isolate the exponential, take \(\ln\).</li>
+    <li><strong>Sketch:</strong> y-intercept at \(T(0)\), horizontal asymptote at \(T=T_\infty\) (dashed), decreasing exponential shape.</li>
+  </ol>
+</div>
+<span class="interactive-tag">Try it before you look</span>
+<div class="reveal-box" id="rv-newton">
+  <span class="lab">Worked example — 2A Q4</span>
+  <p>Coffee at 93°C in a 24°C room cools to 65°C after 10 min. Model: \(T=24+D_0 e^{-kt}\).<br>(a) Find \(D_0\) and \(k\). (b) Find when \(T=37\)°C.</p>
+  <textarea class="try-first" placeholder="Find D0 using t=0, then substitute t=10, T=65 to find k..."></textarea>
+  <div class="reveal-step" data-n="1"><span class="num">1</span><span>\(D_0 = 93 - 24 = 69\).</span></div>
+  <div class="reveal-step" data-n="2"><span class="num">2</span><span>At \(t=10,\ T=65\): \(65 = 24 + 69e^{-10k} \Rightarrow e^{-10k} = \dfrac{41}{69}\).</span></div>
+  <div class="reveal-step" data-n="3"><span class="num">3</span><span>\(-10k = \ln\!\tfrac{41}{69} \Rightarrow k = -\dfrac{1}{10}\ln\!\tfrac{41}{69} = 0.0521\) (3 s.f.).</span></div>
+  <div class="reveal-step" data-n="4"><span class="num">4</span><span>(b) Set \(T=37\): \(37=24+69e^{-0.0521t} \Rightarrow e^{-0.0521t}=\dfrac{13}{69}\).</span></div>
+  <div class="reveal-step" data-n="5"><span class="num">5</span><span>\(t = -\dfrac{1}{0.0521}\ln\!\tfrac{13}{69} = 32\) min (nearest minute).</span></div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="revealNext('rv-newton')">Show next step</button>
+    <button class="btn secondary" onclick="revealAll('rv-newton')">Show all</button>
+    <button class="btn secondary" onclick="revealReset('rv-newton')">Reset</button>
+  </div>
+</div>
+<div class="warn box"><span class="lab">Sketch note — non-zero asymptote</span>The asymptote is \(y=T_\infty\) (e.g. \(y=24\)), NOT \(y=0\). Label it. The y-intercept is at the initial temperature (e.g. 93), not at \(D_0\).</div>
+
+<h3 id="p85-show">8.5.6 "Show that" / proof questions</h3>
+<p>These ask you to prove a given identity. You must work from the given information to the target — not backward from the target. Express everything in terms of a common base or use change-of-base, then track what each substitution achieves.</p>
+<span class="interactive-tag">Try it before you look</span>
+<div class="reveal-box" id="rv-show">
+  <span class="lab">Worked example — CT Paper Q5</span>
+  <p>Given \(m=\log_b a\) and \(n=\log_c a\) where \(a>0\), \(a\neq 1\), \(c=1-b\), show that \(\dfrac{1}{m}=\log_a\!\Big(1-a^{1/n}\Big)\).</p>
+  <textarea class="try-first" placeholder="Start from 1/m. Use the swap rule: 1/m = 1/log_b(a) = log_a(b)..."></textarea>
+  <div class="reveal-step" data-n="1"><span class="num">1</span><span>Using the swap rule: \(\dfrac{1}{m} = \dfrac{1}{\log_b a} = \log_a b\).</span></div>
+  <div class="reveal-step" data-n="2"><span class="num">2</span><span>Since \(c=1-b\): \(\log_a b = \log_a(1-c)\).</span></div>
+  <div class="reveal-step" data-n="3"><span class="num">3</span><span>From \(n=\log_c a\): \(c^n = a \Rightarrow c = a^{1/n}\).</span></div>
+  <div class="reveal-step" data-n="4"><span class="num">4</span><span>Substitute: \(\log_a(1-c) = \log_a(1-a^{1/n})\). Therefore \(\dfrac{1}{m} = \log_a\!\Big(1-a^{1/n}\Big)\). \(\square\)</span></div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="revealNext('rv-show')">Show next step</button>
+    <button class="btn secondary" onclick="revealAll('rv-show')">Show all</button>
+    <button class="btn secondary" onclick="revealReset('rv-show')">Reset</button>
+  </div>
+</div>
+<div class="method box">
+  <span class="lab">How to approach "show that" questions</span>
+  <ul style="margin:.2em 0 0">
+    <li>Choose which side of the target to start from — usually the side with the most structure.</li>
+    <li>Write "LHS =" or "RHS =" and manipulate one side only until you reach the other.</li>
+    <li>Don't assume the result — every step must follow from the previous.</li>
+    <li>The swap rule (\(\tfrac{1}{\log_b a} = \log_a b\)) and \(c^n=a \Rightarrow c=a^{1/n}\) are the two most useful moves here.</li>
+  </ul>
+</div>
+
+<h3 id="p85-nonzeroasym">8.5.7 Sketching exponential graphs with a non-zero asymptote</h3>
+<p>When the model is \(y = A e^{kt} + C\) (not just \(Ae^{kt}\)), the asymptote shifts to \(y=C\). This came up in Newton's Cooling and drug decay questions.</p>
+<div class="box formula">
+  <span class="lab">Summary</span>
+  <ul style="margin:.2em 0 0">
+    <li>For \(y = D_0 e^{-kt} + T_\infty\) (\(k>0\)): y-intercept at \(D_0 + T_\infty\), asymptote \(y=T_\infty\) (above x-axis), decreasing.</li>
+    <li>For \(y = Ae^{kt} + C\) (\(k>0,\ A>0\)): y-intercept at \(A+C\), asymptote \(y=C\), increasing.</li>
+    <li>Mark the asymptote as a dashed horizontal line and label it with its equation.</li>
+  </ul>
+</div>
+
+<span class="interactive-tag">Self-check</span>
+<div id="quiz-p85" class="quiz-host"></div>
+</section>
+
 <!-- ============================ PART 9 ============================ -->
 <section id="p9">
 <h2 class="part"><span class="n">§9</span> Graphs of exponential &amp; logarithmic functions</h2>
@@ -942,6 +1134,41 @@
 <p style="font-family:'Inter',sans-serif;font-size:13px;color:var(--ink-soft)">Built from Worksheets 1–3 (Logarithms · Exp/Log Equations · Graphs). Work through the practice tools above with your pen — recognising a solved step is not the same as producing it yourself under time pressure.</p>
 </section>
 
+<!-- ============================ MOCK PAPERS ============================ -->
+<section id="mock-papers">
+<h2 class="part"><span class="n">§12</span> Mock exam papers</h2>
+<p>Five full-length practice papers in the exact RI format — A4, 20 marks, 30 minutes each. Questions are calibrated to exam difficulty throughout (no soft warm-up questions). Each PDF contains the full paper followed by complete worked solutions with mark schemes, explanations of why the method works, and the common errors for each question.</p>
+<p>Click any paper to open it in the browser, or right-click → Save As to download.</p>
+<div class="mock-links">
+  <a class="mock-link" href="Mock_Paper_1.pdf" target="_blank">
+    <span class="mock-num">Paper 1</span>
+    <span class="mock-desc">Index manipulation · Mixed-base logs · Newton's Law of Cooling</span>
+    <span class="mock-open">Open PDF ↗</span>
+  </a>
+  <a class="mock-link" href="Mock_Paper_2.pdf" target="_blank">
+    <span class="mock-num">Paper 2</span>
+    <span class="mock-desc">Mixed-base log equation · Exact-form substitution · Expressing in p and q</span>
+    <span class="mock-open">Open PDF ↗</span>
+  </a>
+  <a class="mock-link" href="Mock_Paper_3.pdf" target="_blank">
+    <span class="mock-num">Paper 3</span>
+    <span class="mock-desc">Complex index/substitution · Simultaneous log equations · Proof</span>
+    <span class="mock-open">Open PDF ↗</span>
+  </a>
+  <a class="mock-link" href="Mock_Paper_4.pdf" target="_blank">
+    <span class="mock-num">Paper 4</span>
+    <span class="mock-desc">Quadratic in log · Two-exponent equation · Graphical method</span>
+    <span class="mock-open">Open PDF ↗</span>
+  </a>
+  <a class="mock-link" href="Mock_Paper_5.pdf" target="_blank">
+    <span class="mock-num">Paper 5</span>
+    <span class="mock-desc">Mixed-base cubic · Exact-form substitution · Radioactive decay · Base &lt;1 sketch</span>
+    <span class="mock-open">Open PDF ↗</span>
+  </a>
+</div>
+<div class="tip box" style="margin-top:18px"><span class="lab">How to use these</span>Set a 30-minute timer, do the whole paper on paper without looking at the solutions, then self-mark against the worked solutions at the back. If you got a method wrong, go back to the relevant section in this guide before moving to the next paper.</div>
+</section>
+
 <!-- ============================ PART 11 ============================ -->
 <section id="p11">
 <h2 class="part"><span class="n">§11</span> Mixed final review</h2>
@@ -954,47 +1181,55 @@
 </div>
 
 <script>
-window.addEventListener("load", function () {
-  if (window.renderMathInElement) {
-    renderMathInElement(document.body, {
-      delimiters: [
-        {left: "\\[", right: "\\]", display: true},
-        {left: "\\(", right: "\\)", display: false}
-      ],
-      throwOnError: false
-    });
+/* ========================= KaTeX: robust polling loader ========================= */
+/* 'defer' scripts load after DOMContentLoaded. We poll until renderMathInElement
+   exists, then boot everything. All dynamic renders go through reMath(el). */
+var KATEX_DELIMITERS = [
+  {left:"\\[", right:"\\]", display:true},
+  {left:"\\(", right:"\\)", display:false}
+];
+function reMath(el){
+  if (!el || !window.renderMathInElement) return;
+  try { renderMathInElement(el, {delimiters:KATEX_DELIMITERS, throwOnError:false}); } catch(e){}
+}
+(function waitKatex(){
+  if (window.renderMathInElement && window.katex){
+    reMath(document.body);
+    initQuizzes();
+    initMistakeDeck();
+    initFlashcards();
+    initGenerator();
+    initGenCmp();
+    initGenLog();
+    initGenQuad();
+    initSketcher();
+    initTocLinks();
+    initMixedReview();
+  } else {
+    setTimeout(waitKatex, 80);
   }
-});
-/* ========================= KaTeX render ========================= */
-window.addEventListener("DOMContentLoaded", function () {
-  function renderAllMath() {
-    if (window.renderMathInElement && window.katex) {
-      const scope = document.querySelector('main') || document.body;
-      renderMathInElement(scope, {
-        delimiters: [
-          {left: "\\[", right: "\\]", display: true},
-          {left: "\\(", right: "\\)", display: false}
-        ],
-        throwOnError: false
-      });
-    }
-  }
-  renderAllMath();
-  window.setTimeout(renderAllMath, 400);
-  window.setTimeout(renderAllMath, 1200);
-  initQuizzes();
-  initMistakeDeck();
-  initFlashcards();
-  initGenerator();
-  initGenCmp();
-  initGenLog();
-  initGenQuad();
-  initSketcher();
-  initTocLinks();
-  initMixedReview();
-});
+})();
 
-/* ========================= TOC in-page scroll (avoid anchor navigation issues) ========================= */
+/* ========================= Mock paper tabs & solution toggles ========================= */
+function showPaper(n){
+  for(var i=1;i<=5;i++){
+    var p=document.getElementById('paper-'+i);
+    var t=document.querySelectorAll('.paper-tab')[i-1];
+    if(p){ p.style.display=(i===n?'block':'none'); }
+    if(t){ t.classList.toggle('active',i===n); }
+    // close solutions when switching papers
+    var s=document.getElementById('soln-'+i);
+    if(s){ s.classList.remove('open'); }
+  }
+  reMath(document.getElementById('paper-'+n));
+}
+function toggleSoln(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  var wasOpen=el.classList.contains('open');
+  el.classList.toggle('open',!wasOpen);
+  if(!wasOpen){ reMath(el); }
+}
 function toggleToc(forceOpen){
   var nav = document.getElementById('toc-nav');
   var backdrop = document.getElementById('toc-backdrop');
@@ -1025,7 +1260,7 @@ function revealNext(id){
   for (var i=0;i<steps.length;i++){
     if (!steps[i].classList.contains('shown')){
       steps[i].classList.add('shown');
-      if (window.renderMathInElement) renderMathInElement(steps[i], {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+      reMath(steps[i]);
       break;
     }
   }
@@ -1034,7 +1269,7 @@ function revealAll(id){
   var box = document.getElementById(id);
   var steps = box.querySelectorAll('.reveal-step');
   steps.forEach(function(s){ s.classList.add('shown'); });
-  if (window.renderMathInElement) renderMathInElement(box, {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+  reMath(box);
 }
 function revealReset(id){
   var box = document.getElementById(id);
@@ -1071,6 +1306,13 @@ var QUIZ_DATA = {
     {q:"To solve \\(\\log_2(x+3) = 4\\), you should rewrite it as:", opts:["\\(x+3 = 2\\times4\\)","\\(x+3 = 4^2\\)","\\(x+3 = 2^4\\)","\\(x = 2^4 - 3\\log 2\\)"], correct:2, explain:"A single log = constant converts to index form: base raised to that constant equals the argument."},
     {q:"After solving a log equation and getting \\(x=2\\) and \\(x=-1\\), where the original had \\(\\log(x+1)\\), what must you check?", opts:["Nothing, both are valid","Whether \\(x+1>0\\) for each solution","Whether \\(x\\) is an integer","Whether \\(x>10\\)"], correct:1, explain:"Every solution must keep every log argument positive in the ORIGINAL equation — reject any that don't."}
   ],
+  'quiz-p85': [
+    {q:"To solve \\(\\log_4(4x-7) + \\log_2 x = 1 + 3\\log_4(x-1)\\), what's the first move?", opts:["Convert \\(\\log_2 x\\) to base 4 using \\(\\log_2 x = 2\\log_4 x\\)","Take \\(\\lg\\) of both sides","Let \\(u = \\log_4 x\\)","Subtract \\(\\log_2 x\\) from both sides"], correct:0, explain:"Mixed bases must be unified first. Since \\(\\log_4 2 = 1/2\\), we get \\(\\log_2 x = 2\\log_4 x\\). Then everything is in base 4."},
+    {q:"For Newton's Law of Cooling \\(T = 24 + D_0 e^{-kt}\\), if the initial temperature is 93°C, then \\(D_0\\) equals:", opts:["\\(93\\)","\\(24\\)","\\(69\\)","\\(-69\\)"], correct:2, explain:"\\(D_0\\) is the initial temperature DIFFERENCE: \\(D_0 = 93 - 24 = 69\\). The asymptote is the room temperature \\(T=24\\), not 0."},
+    {q:"In a 'show that' proof, which is the correct approach?", opts:["Start from both sides simultaneously and meet in the middle","Start from one side only and manipulate until you reach the other side","Assume the result is true and verify with a specific value","Rearrange the target equation until it becomes 0=0"], correct:1, explain:"You must show a chain of valid steps from given information to the target. Starting from both sides is circular; assuming the result is not a valid proof."},
+    {q:"To solve \\(\\tfrac{1}{(5-3x)^2} = e^{4x+5}\\) graphically using \\(y=\\ln(5-3x)\\), the line to draw is:", opts:["\\(y = 4x+5\\)","\\(y = -2x - \\tfrac{5}{2}\\)","\\(y = e^{4x+5}\\)","\\(y = (5-3x)^2\\)"], correct:1, explain:"Take ln of both sides: \\(-2\\ln(5-3x) = 4x+5\\), so \\(\\ln(5-3x) = -2x - 5/2\\). The right-hand side is the line to draw on the axes with \\(y = \\ln(5-3x)\\)."},
+    {q:"Given \\(\\log_8 x = p\\), what is \\(\\log_4 x\\) in terms of \\(p\\)?", opts:["\\(p\\)","\\(2p\\)","\\(\\tfrac{3p}{2}\\)","\\(\\tfrac{p}{2}\\)"], correct:2, explain:"\\(\\log_4 x = \\dfrac{\\log_8 x}{\\log_8 4} = \\dfrac{p}{2/3} = \\dfrac{3p}{2}\\), since \\(4 = 2^2\\) and \\(8 = 2^3\\) so \\(\\log_8 4 = 2/3\\)."}
+  ],
   'quiz-p6': [
     {q:"In the equation \\((\\lg x)^2 - 5\\lg x + 6 = 0\\), the correct substitution is:", opts:["\\(u = x\\)","\\(u = \\lg x\\)","\\(u = 10^x\\)","\\(u = x^2\\)"], correct:1, explain:"The equation is quadratic in \\(\\lg x\\), so letting \\(u=\\lg x\\) turns it into \\(u^2-5u+6=0\\)."},
     {q:"If \\(u = \\log_3 x\\) and you find \\(u = -2\\), then \\(x\\) equals:", opts:["\\(-2\\)","\\(3^{-2} = 1/9\\)","\\(-9\\)","\\(\\log_3(-2)\\)"], correct:1, explain:"Back-substitute using the definition: \\(\\log_3 x = -2 \\Rightarrow x = 3^{-2} = 1/9\\)."}
@@ -1081,7 +1323,10 @@ var QUIZ_DATA = {
 var EXTRA_REVIEW_QUESTIONS = [
   {q:"Solving \\(\\log_x 2+\\log_x 4+\\log_x 8=6\\), the first move is to:", opts:["Condense with the product law: \\(\\log_x(2\\times4\\times8)=6\\)","Take lg of both sides","Divide every term by 6","Substitute \\(u=\\log_x 2\\)"], correct:0, explain:"All three logs share the same base — even though that base is the unknown \\(x\\) — so the product law still applies directly."},
   {q:"Given \\(\\log_7(x^2y)=p\\) and \\(\\log_7(x/y^2)=q\\), the best way to find \\(\\log_7(x^3y)\\) is to:", opts:["Expand all three in terms of \\(\\log_7 x\\) and \\(\\log_7 y\\), solve the given pair, then substitute","Multiply p and q directly","Add p and q directly","It cannot be found from p and q"], correct:0, explain:"Expressing everything in terms of X=\\(\\log_7 x\\) and Y=\\(\\log_7 y\\) turns this into an ordinary simultaneous-equations problem."},
-  {q:"For \\(P=53.50(1.03)^n\\), to find \\(n\\) when \\(P=110\\) the first step is:", opts:["Divide both sides by 53.50, then take lg of both sides","Take lg of 53.50 alone","Substitute \\(n=0\\)","Square both sides"], correct:0, explain:"Isolate the power term first, then take a log to bring the exponent \\(n\\) down — the standard method from §5."}
+  {q:"For \\(P=53.50(1.03)^n\\), to find \\(n\\) when \\(P=110\\) the first step is:", opts:["Divide both sides by 53.50, then take lg of both sides","Take lg of 53.50 alone","Substitute \\(n=0\\)","Square both sides"], correct:0, explain:"Isolate the power term first, then take a log to bring the exponent \\(n\\) down — the standard method from §5."},
+  {q:"To solve \\(\\log_4 3x - \\log_{16}(3x-1) = \\tfrac{1}{2}\\), the first move is:", opts:["Convert \\(\\log_{16}(3x-1)\\) to base 4: \\(\\log_{16}(3x-1) = \\tfrac{1}{2}\\log_4(3x-1)\\)","Take \\(e\\) of both sides","Let \\(u = 3x\\)","Multiply everything by 2"], correct:0, explain:"Since \\(\\log_4 16 = 2\\), we get \\(\\log_{16}(3x-1) = \\frac{\\log_4(3x-1)}{2}\\). Converting to a common base (4) lets you condense and solve."},
+  {q:"For Newton's Cooling \\(T = T_\\infty + D_0 e^{-kt}\\), the sketch for \\(t \\ge 0\\) always has:", opts:["Asymptote \\(y=0\\) and y-intercept at \\(D_0\\)","Asymptote \\(y = T_\\infty\\) and y-intercept at \\(T_\\infty + D_0\\)","Asymptote \\(y = D_0\\) and y-intercept at \\(T_\\infty\\)","No asymptote — the curve reaches 0 eventually"], correct:1, explain:"The curve decays toward the room temperature \\(T_\\infty\\), not zero. The y-intercept is the initial temperature: \\(T(0) = T_\\infty + D_0\\)."},
+  {q:"In a 'show that' question, the swap rule \\(\\tfrac{1}{\\log_b a} = \\log_a b\\) is useful when:", opts:["You need to change base from \\(a\\) to \\(b\\)","The target has a reciprocal of a log, and you need to flip the base and argument","The question involves the product law","The equation has \\(\\ln\\) and \\(\\lg\\) mixed"], correct:1, explain:"The swap rule converts \\(1/m = 1/\\log_b a\\) directly into \\(\\log_a b\\), which is the key step in most 'show that' proofs involving reciprocals of logs."}
 ];
 
 function initQuizzes(){
@@ -1143,7 +1388,7 @@ function renderQuiz(host, questions){
           fb.className = 'quiz-fb show bad';
           fb.innerHTML = 'Not quite — ' + q.explain;
         }
-        if (window.renderMathInElement) renderMathInElement(block, {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+        reMath(block);
       };
       opts.appendChild(b);
     });
@@ -1169,7 +1414,7 @@ function renderQuiz(host, questions){
     }
     block.appendChild(nav);
     host.appendChild(block);
-    if (window.renderMathInElement) renderMathInElement(block, {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+    reMath(block);
   }
   renderQ();
 }
@@ -1199,7 +1444,7 @@ function showMistakeCard(){
   document.getElementById('mistake-false').classList.remove('correct');
   document.getElementById('mistake-next').disabled = true;
   mAnswered = false;
-  if (window.renderMathInElement) renderMathInElement(document.getElementById('mistake-deck'), {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+  reMath(document.getElementById('mistake-deck'));
 }
 function mistakeAnswer(guess){
   if (mAnswered) return;
@@ -1212,7 +1457,7 @@ function mistakeAnswer(guess){
   document.getElementById('mistake-true').disabled = true;
   document.getElementById('mistake-false').disabled = true;
   document.getElementById('mistake-next').disabled = false;
-  if (window.renderMathInElement) renderMathInElement(document.getElementById('mistake-deck'), {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+  reMath(document.getElementById('mistake-deck'));
 }
 function mistakeNext(){
   mIdx = (mIdx + 1) % MISTAKE_CARDS.length;
@@ -1243,7 +1488,7 @@ function renderFlashcard(){
   document.getElementById('flash-front').innerHTML = '<span class="flash-content">' + FLASHCARDS[fIdx].front + '</span>';
   document.getElementById('flash-back').innerHTML = '<span class="flash-content">' + FLASHCARDS[fIdx].back + '</span>';
   document.getElementById('flash-counter').textContent = (fIdx+1) + ' / ' + FLASHCARDS.length;
-  if (window.renderMathInElement) renderMathInElement(document.getElementById('flashcard'), {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+  reMath(document.getElementById('flashcard'));
 }
 function flipCard(){ document.getElementById('flashcard').classList.toggle('flipped'); }
 function flashNext(){ fIdx = (fIdx+1) % FLASHCARDS.length; renderFlashcard(); }
@@ -1267,7 +1512,7 @@ function renderGenProblem(){
   document.getElementById('gen-problem').innerHTML = 'Solve \\(' + genCurrent.a + '^{x} = ' + genCurrent.b + '\\), giving your answer to 3 significant figures.';
   document.getElementById('gen-solution').className = 'gen-solution';
   document.getElementById('gen-solution').innerHTML = '';
-  if (window.renderMathInElement) renderMathInElement(document.getElementById('gen-problem'), {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+  reMath(document.getElementById('gen-problem'));
 }
 function genNew(){ genCurrent = makeGenProblem(); renderGenProblem(); }
 function genReveal(){
@@ -1276,7 +1521,7 @@ function genReveal(){
   sol.className = 'gen-solution show';
   sol.innerHTML = '<div class="work">lg both sides: x·lg(' + genCurrent.a + ') = lg(' + genCurrent.b + ')</div>' +
     '<p style="margin-top:8px">\\(x = \\dfrac{\\lg ' + genCurrent.b + '}{\\lg ' + genCurrent.a + '} = ' + xVal + '\\) (3 s.f.)</p>';
-  if (window.renderMathInElement) renderMathInElement(sol, {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+  reMath(sol);
 }
 
 /* ========================= Practice generator (Section 3 — compare indices) ========================= */
@@ -1325,7 +1570,7 @@ function renderGenCmp(){
   document.getElementById('gen-cmp-problem').innerHTML = 'Solve \\(' + g.numberA + '^{' + fmtLinear(g.p,g.q) + '} = ' + g.numberB + '^{' + fmtLinear(g.r,g.s) + '}\\).';
   document.getElementById('gen-cmp-solution').className = 'gen-solution';
   document.getElementById('gen-cmp-solution').innerHTML = '';
-  if (window.renderMathInElement) renderMathInElement(document.getElementById('gen-cmp-problem'), {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+  reMath(document.getElementById('gen-cmp-problem'));
 }
 function genCmpNew(){ genCmpCurrent = makeGenCmpProblem(); renderGenCmp(); }
 function genCmpReveal(){
@@ -1337,7 +1582,7 @@ function genCmpReveal(){
     '<div class="work">Rewrite in a common base: ' + g.numberA + ' = base^' + g.eA + ', ' + g.numberB + ' = base^' + g.eB + '</div>' +
     '<p style="margin-top:8px">\\(' + g.eA + '(' + fmtLinear(g.p,g.q) + ') = ' + g.eB + '(' + fmtLinear(g.r,g.s) + ')\\)</p>' +
     '<p>Expand and collect \\(x\\)-terms, then solve: \\(x = ' + xStr + '\\)</p>';
-  if (window.renderMathInElement) renderMathInElement(sol, {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+  reMath(sol);
 }
 
 /* ========================= Practice generator (Section 4 — log equation) ========================= */
@@ -1358,7 +1603,7 @@ function renderGenLog(){
   document.getElementById('gen-log-problem').innerHTML = 'Solve \\(\\log_{' + g.b + '}(' + fmtLinear(g.m,g.c) + ') = ' + g.k + '\\).';
   document.getElementById('gen-log-solution').className = 'gen-solution';
   document.getElementById('gen-log-solution').innerHTML = '';
-  if (window.renderMathInElement) renderMathInElement(document.getElementById('gen-log-problem'), {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+  reMath(document.getElementById('gen-log-problem'));
 }
 function genLogNew(){ genLogCurrent = makeGenLogProblem(); renderGenLog(); }
 function genLogReveal(){
@@ -1369,7 +1614,7 @@ function genLogReveal(){
     '<div class="work">Switch to exponential form: ' + fmtLinear(g.m,g.c) + ' = ' + g.b + '^' + g.k + ' = ' + g.bk + '</div>' +
     '<p style="margin-top:8px">\\(' + g.m + 'x = ' + g.bk + (g.c>=0? ' - ' + g.c : ' + ' + Math.abs(g.c)) + '\\)</p>' +
     '<p>\\(x = ' + g.xTarget + '\\)</p>';
-  if (window.renderMathInElement) renderMathInElement(sol, {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+  reMath(sol);
 }
 
 /* ========================= Practice generator (Section 6 — quadratic in log) ========================= */
@@ -1397,7 +1642,7 @@ function renderGenQuad(){
   document.getElementById('gen-quad-problem').innerHTML = 'Solve \\((' + lg + ' x)^2' + Sterm + lg + ' x' + Pterm + ' = 0\\).';
   document.getElementById('gen-quad-solution').className = 'gen-solution';
   document.getElementById('gen-quad-solution').innerHTML = '';
-  if (window.renderMathInElement) renderMathInElement(document.getElementById('gen-quad-problem'), {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+  reMath(document.getElementById('gen-quad-problem'));
 }
 function genQuadNew(){ genQuadCurrent = makeGenQuadProblem(); renderGenQuad(); }
 function genQuadReveal(){
@@ -1409,7 +1654,7 @@ function genQuadReveal(){
     '<div class="work">Let u = ' + lg.replace(/\\\\/,'') + ' x — this factors to (u - (' + g.u1 + '))(u - (' + g.u2 + ')) = 0</div>' +
     '<p style="margin-top:8px">\\(u = ' + g.u1 + '\\) or \\(u = ' + g.u2 + '\\)</p>' +
     '<p>Back-substitute: \\(x = ' + g.b + '^{' + g.u1 + '} = ' + fmtRoot(g.b,g.u1) + '\\) or \\(x = ' + g.b + '^{' + g.u2 + '} = ' + fmtRoot(g.b,g.u2) + '\\)</p>';
-  if (window.renderMathInElement) renderMathInElement(sol, {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+  reMath(sol);
 }
 
 /* ========================= Graph sketcher (Section 9.4) ========================= */
@@ -1440,7 +1685,7 @@ function skSetup(){
   document.getElementById('sk-fb').className = 'sketcher-fb';
   document.getElementById('sk-fb').textContent = '';
   drawSketcherSvg();
-  if (window.renderMathInElement) renderMathInElement(document.getElementById('sk-target'), {delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}], throwOnError:false});
+  reMath(document.getElementById('sk-target'));
 }
 function skSetMode(m){
   skMode = m;
@@ -1514,3 +1759,5 @@ function skNew(){
   skSetup();
 }
 </script>
+</body>
+</html>
