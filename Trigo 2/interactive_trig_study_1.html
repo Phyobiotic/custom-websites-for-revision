@@ -1,0 +1,1305 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trigonometry II — Interactive Study Guide</title>
+
+<!-- KaTeX: synchronous, no defer (see Critical Rules) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#FBFAF6;
+  --paper-2:#F4F1E8;
+  --ink:#1c2733;
+  --ink-soft:#3f4c59;
+  --line:#dcd6c8;
+  --navy:#1f4e6b;
+  --navy-2:#2c6a90;
+  --teal:#0f7a6b;
+  --amber:#b26a00;
+  --amber-bg:#fdf3e0;
+  --crimson:#9c3550;
+  --teal-bg:#e9f5f2;
+  --navy-bg:#eaf1f6;
+  --good:#1d7a4c;
+  --good-bg:#e8f5ee;
+  --bad:#a83232;
+  --bad-bg:#fbeaea;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Newsreader",Georgia,serif;font-size:18px;line-height:1.62;}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+
+nav.toc{position:fixed;top:0;left:0;height:100vh;width:270px;max-width:82vw;overflow-y:auto;padding:70px 22px 40px 20px;z-index:60;font-family:"Inter",sans-serif;font-size:13px;line-height:1.4;background:var(--paper-2);border-right:1px solid var(--line);box-shadow:8px 0 28px rgba(28,20,10,.10);transform:translateX(-104%);transition:transform .32s cubic-bezier(.4,0,.2,1);}
+nav.toc.open{transform:translateX(0)}
+nav.toc .brand{font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--crimson);margin-bottom:14px}
+nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 0 5px 12px;border-left:2px solid var(--line)}
+nav.toc a:hover{color:var(--navy);border-left-color:var(--navy-2)}
+nav.toc a.part{margin-top:12px;font-weight:600;color:var(--ink);border-left:2px solid var(--navy-2)}
+main{padding:34px 0 120px}
+
+header.hero{border:1.5px solid var(--ink);background:var(--paper-2);padding:30px 30px 26px;margin-bottom:34px;}
+header.hero .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--crimson)}
+header.hero h1{font-size:40px;line-height:1.05;margin:.28em 0 .18em;font-weight:600;letter-spacing:-.01em}
+header.hero p{margin:.2em 0 0;color:var(--ink-soft);max-width:60ch;font-size:17px}
+header.hero .tag{display:inline-block;margin-top:14px;font-family:"IBM Plex Mono",monospace;font-size:12px;background:var(--ink);color:var(--paper);padding:3px 9px;letter-spacing:.08em}
+
+h2.part{font-family:"Inter",sans-serif;font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--crimson);margin:56px 0 6px;display:flex;align-items:baseline;gap:12px;}
+h2.part .n{font-family:"IBM Plex Mono",monospace;color:var(--navy-2)}
+h2.part::after{content:"";flex:1;height:1.5px;background:var(--line)}
+h3{font-size:25px;font-weight:600;margin:30px 0 4px;letter-spacing:-.01em}
+h4{font-size:19px;font-weight:600;margin:22px 0 2px;color:var(--navy)}
+p{margin:.55em 0}
+ul,ol{margin:.5em 0 .5em;padding-left:1.4em}
+li{margin:.28em 0}
+strong{font-weight:600}
+code{font-family:"IBM Plex Mono",monospace;font-size:.86em;background:var(--paper-2);padding:1px 5px;border-radius:3px}
+
+.box{border-radius:2px;padding:16px 20px;margin:18px 0;border:1px solid var(--line)}
+.box .lab{font-family:"Inter",sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:6px}
+.formula{background:var(--navy-bg);border-color:#c6d8e6}.formula .lab{color:var(--navy)}
+.eg{background:#fff;border-left:4px solid var(--teal)}.eg .lab{color:var(--teal)}
+.warn{background:var(--amber-bg);border-color:#eccf9a}.warn .lab{color:var(--amber)}
+.tip{background:var(--teal-bg);border-color:#bfe0d9}.tip .lab{color:var(--teal)}
+.method{background:var(--paper-2);border-color:var(--line)}.method .lab{color:var(--crimson)}
+
+.steps{counter-reset:s;list-style:none;padding-left:0;margin:.4em 0}
+.steps>li{counter-increment:s;position:relative;padding-left:38px;margin:.55em 0}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:13px;display:flex;align-items:center;justify-content:center;}
+.work{font-family:"IBM Plex Mono",monospace;font-size:.82em;color:var(--ink-soft)}
+.katex{font-size:1.03em}
+.katex-display{margin:.5em 0;overflow-x:auto;overflow-y:hidden;padding:2px 0}
+
+table.ref{border-collapse:collapse;width:100%;margin:16px 0;font-size:16px;font-family:"Inter",sans-serif}
+table.ref th,table.ref td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+table.ref th{background:var(--paper-2);font-weight:600;font-size:13px;letter-spacing:.03em}
+table.ref tr:nth-child(even) td{background:#fdfcf9}
+hr.soft{border:none;border-top:1px dashed var(--line);margin:30px 0}
+.checklist{list-style:none;padding-left:0}
+.checklist li{padding-left:30px;position:relative}
+.checklist li::before{content:"\2713";position:absolute;left:0;color:var(--teal);font-weight:700}
+
+.interactive-tag{display:inline-flex;align-items:center;gap:6px;font-family:"Inter",sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--crimson);padding:3px 9px;border-radius:3px;margin:22px 0 -6px;}
+.interactive-tag::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;display:inline-block}
+
+.reveal-box{background:#fff;border:1px solid var(--line);border-left:4px solid var(--navy-2);border-radius:2px;padding:16px 20px;margin:18px 0}
+.reveal-box .lab{font-family:"Inter",sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);display:block;margin-bottom:6px}
+.reveal-step{display:none;padding-left:38px;position:relative;margin:.6em 0;animation:fadein .25s ease}
+.reveal-step.shown{display:block}
+.reveal-step .num{position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:13px;display:flex;align-items:center;justify-content:center;}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.reveal-controls{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.btn{font-family:"Inter",sans-serif;font-size:13px;font-weight:600;letter-spacing:.02em;color:#fff;background:var(--navy);border:none;border-radius:3px;padding:8px 15px;cursor:pointer;transition:background .15s;}
+.btn:hover{background:var(--navy-2)}
+.btn.secondary{background:transparent;color:var(--navy);border:1px solid var(--navy-2)}
+.btn.secondary:hover{background:var(--navy-bg)}
+.try-first{width:100%;min-height:64px;font-family:"Newsreader",serif;font-size:16px;padding:10px 12px;border:1px dashed var(--line);border-radius:3px;background:var(--paper-2);resize:vertical;margin:8px 0}
+.try-first::placeholder{color:#8a8375;font-style:italic}
+
+.quiz-block{background:#fff;border:1px solid var(--line);border-radius:2px;padding:18px 20px;margin:16px 0}
+.quiz-q{font-weight:600;margin-bottom:10px}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{text-align:left;font-family:"Newsreader",serif;font-size:17px;background:var(--paper-2);border:1px solid var(--line);border-radius:3px;padding:9px 14px;cursor:pointer;transition:.15s;}
+.quiz-opt:hover:not(.locked){border-color:var(--navy-2)}
+.quiz-opt.correct{background:var(--good-bg);border-color:var(--good);color:var(--good)}
+.quiz-opt.incorrect{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+.quiz-opt.locked{cursor:default}
+.quiz-fb{margin-top:10px;padding:10px 14px;border-radius:3px;font-size:16px;display:none;font-family:"Newsreader",serif}
+.quiz-fb.show{display:block}
+.quiz-fb.good{background:var(--good-bg);color:#12492e}
+.quiz-fb.bad{background:var(--bad-bg);color:#6b1f1f}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:"Inter",sans-serif;font-size:13px;color:var(--ink-soft)}
+
+.mistake-deck{background:#fff;border:1px solid var(--line);border-radius:2px;padding:20px;margin:16px 0}
+.mistake-stmt{font-size:19px;text-align:center;padding:18px;background:var(--paper-2);border-radius:3px;min-height:2.6em;display:flex;align-items:center;justify-content:center;}
+.tf-btns{display:flex;gap:12px;justify-content:center;margin-top:14px}
+.tf-btn{font-family:"Inter",sans-serif;font-weight:700;letter-spacing:.06em;padding:9px 26px;border-radius:20px;cursor:pointer;border:2px solid var(--ink);background:#fff;font-size:14px}
+.tf-btn:hover{background:var(--paper-2)}
+.tf-btn:disabled{opacity:.35;cursor:default}
+.mistake-fb{margin-top:14px;padding:12px 14px;border-radius:3px;display:none}
+.mistake-fb.show{display:block}
+.mistake-fb.good{background:var(--good-bg)}
+.mistake-fb.bad{background:var(--bad-bg)}
+.mistake-nav{text-align:center;margin-top:14px}
+
+.flash-wrap{display:flex;flex-direction:column;align-items:center;margin:16px 0}
+.flashcard{width:100%;max-width:520px;height:150px;perspective:1200px;cursor:pointer;}
+.flash-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flashcard.flipped .flash-inner{transform:rotateY(180deg)}
+.flash-face{position:absolute;inset:0;backface-visibility:hidden;border:1.5px solid var(--ink);border-radius:6px;display:flex;align-items:center;justify-content:center;padding:18px;background:var(--paper-2);}
+.flash-content{text-align:center;line-height:1.5}
+.flash-face.back{transform:rotateY(180deg);background:var(--navy);color:#fff;border-color:var(--navy)}
+.flash-hint{font-family:"Inter",sans-serif;font-size:12px;color:var(--ink-soft);margin-top:8px;letter-spacing:.04em}
+.flash-controls{display:flex;gap:10px;margin-top:14px;align-items:center;font-family:"Inter",sans-serif;font-size:13px;color:var(--ink-soft)}
+
+.gen-box{background:#fff;border:1px solid var(--line);border-radius:2px;padding:18px 20px;margin:16px 0}
+.gen-problem{font-size:20px;text-align:center;padding:20px;background:var(--paper-2);border-radius:3px;margin:10px 0}
+.gen-solution{display:none;margin-top:14px;border-top:1px dashed var(--line);padding-top:14px}
+.gen-solution.show{display:block}
+
+.toc-toggle{position:fixed;top:22px;left:0;z-index:70;display:inline-flex;align-items:center;background:var(--paper);border:1px solid var(--line);border-left:none;border-radius:0 22px 22px 0;padding:12px 16px 12px 12px;cursor:pointer;box-shadow:2px 3px 10px rgba(28,20,10,.08);transition:background .15s,box-shadow .15s;}
+.toc-toggle:hover{background:var(--navy-bg);box-shadow:2px 4px 14px rgba(28,20,10,.12)}
+.toc-toggle .bars{display:inline-flex;flex-direction:column;gap:3px}
+.toc-toggle .bars span{display:block;width:16px;height:1.5px;background:var(--navy);border-radius:1px}
+.toc-backdrop{display:none;position:fixed;inset:0;background:rgba(28,22,14,.28);z-index:55}
+.toc-backdrop.show{display:block}
+
+@media(max-width:860px){
+  body{font-size:17px}
+  header.hero{margin-top:44px}
+  header.hero h1{font-size:30px}
+  main{padding-top:16px}
+  .flashcard{height:180px}
+}
+</style>
+
+<button class="toc-toggle" id="toc-toggle" onclick="toggleToc()" aria-label="Toggle contents">
+  <span class="bars"><span></span><span></span><span></span></span>
+</button>
+<div class="toc-backdrop" id="toc-backdrop" onclick="toggleToc(false)"></div>
+
+<div class="wrap">
+<nav class="toc" id="toc-nav">
+  <div class="brand">Trig II · Contents</div>
+  <a class="part" href="#p0">§0 · Recognizing Question Types</a>
+  <a class="part" href="#p1">§1 · General Angles &amp; ASTC</a>
+  <a href="#p1-special">Special values table</a>
+  <a href="#p1-negative">Negative angles</a>
+  <a class="part" href="#p2">§2 · Reciprocal &amp; Complementary Ratios</a>
+  <a class="part" href="#p3">§3 · Pythagorean Identities</a>
+  <a class="part" href="#p4">§4 · Solving Equations with Identities</a>
+  <a class="part" href="#p5">§5 · Addition Formulae</a>
+  <a class="part" href="#p6">§6 · Quadrants, Ratios &amp; Proofs</a>
+  <a class="part" href="#p7">§7 · R-Formulae</a>
+  <a class="part" href="#p8">§8 · Applications of R-Formulae</a>
+  <a class="part" href="#pcheat">§9 · Exam Cheat-Sheet</a>
+  <a href="#flashcards-anchor">Formula flashcards</a>
+  <a href="#mistake-anchor">Spot the mistake</a>
+  <a class="part" href="#pmix">§10 · Mixed Final Review</a>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">Trigonometry II · General Angles → R-Formulae</div>
+  <h1>Trigonometry II, worked from scratch</h1>
+  <p>An interactive rebuild of general angles, the fundamental identities, addition formulae and R-formulae — built for catching up on lessons you missed. Try every problem yourself before you reveal the steps.</p>
+  <span class="tag">Read top to bottom once, then use the generators and quizzes to test yourself.</span>
+</header>
+
+<!-- ============================================================ -->
+<!-- SECTION 0 — STRATEGY MAP -->
+<!-- ============================================================ -->
+<section id="p0">
+<h2 class="part"><span class="n">§0</span> Recognizing question types — what do I do first?</h2>
+
+<p>This is the section that actually wins you marks under time pressure. Knowing every formula doesn't help if you can't tell <em>which</em> formula a question is fishing for. Every question type below has a giveaway "look" — train yourself to spot the look and fire off the matching first move <strong>before</strong> you touch any algebra. Every §1–§8 section repeats this same idea in its own method box, but here they're all side by side so you can drill the recognition skill on its own.</p>
+
+<div class="box method">
+  <span class="lab">The recognition table — surface feature → first move</span>
+  <table class="ref" style="margin:8px 0 0">
+    <tr><th>What the question looks like</th><th>Your first move</th></tr>
+    <tr><td>"Evaluate without a calculator", angle is negative or \(&gt;360°\)</td><td><strong>Reduce the angle</strong> into \(0°\)–\(360°\) first, <em>then</em> find quadrant → ASTC sign → basic angle (§1)</td></tr>
+    <tr><td>You're given one ratio (e.g. \(\tan A=-\tfrac5{12}\)) plus a quadrant/range, asked for others</td><td><strong>Build the right triangle</strong> from the magnitude, then use every given clue together to pin down the <em>one</em> exact quadrant before assigning any signs (§2, §6)</td></tr>
+    <tr><td>The statement uses \(\equiv\), or says "prove" / "show that"</td><td><strong>Start on the messier side</strong> (more terms, more fractions, mixed angles) — never touch the simpler side first. Hunt for a \(\sin^2+\cos^2\) pattern to substitute (§3)</td></tr>
+    <tr><td>An equation mixes \(\sec^2x\) with \(\tan x\) (or \(\operatorname{cosec}^2x\) with \(\cot x\))</td><td><strong>Substitute a Pythagorean identity</strong> to collapse everything into one function, then treat it as an ordinary polynomial (§4)</td></tr>
+    <tr><td>You're given \(\sec A\pm\tan A=k\) (or a similar paired sum/difference)</td><td><strong>Pair it with the proven identity</strong> linking the "+" and "−" versions, then add/subtract the two equations (§3)</td></tr>
+    <tr><td>An equation contains a compound angle like \(\sin(x+30°)\)</td><td><strong>Expand with the addition formula first</strong> — this always turns it back into plain \(\sin x\) and \(\cos x\) (§5)</td></tr>
+    <tr><td>You need an exact (surd) value of an angle like \(165°\) or \(75°\)</td><td><strong>Split it as a sum/difference</strong> of two angles from \(\{30°,45°,60°,\dots\}\) you already know, then apply the addition formula (§5)</td></tr>
+    <tr><td>An equation looks like \(a\sin\theta\pm b\cos\theta=c\) with \(c\ne0\)</td><td><strong>Convert to R-form first</strong> — you now have a one-function equation (§8)</td></tr>
+    <tr><td>Same shape but \(c=0\)</td><td><strong>Skip R-form entirely</strong> — divide both sides by \(\cos\theta\) to get \(\tan\theta=\)… directly, much faster</td></tr>
+    <tr><td>The question asks for a maximum or minimum value</td><td><strong>Convert to R-form</strong> — max is always \(R\), min is always \(-R\), no calculus needed (§8)</td></tr>
+    <tr><td>A diagram with a variable angle \(\theta\) and a length to find</td><td><strong>Derive the algebraic expression first</strong> using ordinary right-triangle trig on the diagram — only <em>then</em> reach for R-form or an equation method (§8)</td></tr>
+  </table>
+</div>
+
+<div class="tip box"><span class="lab">How to use this table</span>Cover the right-hand column with your hand. Read only the left column and say the first move out loud before checking. That's the actual skill being tested in an exam — not whether you know the formula, but whether you recognise <em>when</em> to reach for it.</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 1 -->
+<!-- ============================================================ -->
+<section id="p1">
+<h2 class="part"><span class="n">§1</span> General Angles, ASTC &amp; the Basic-Angle Method</h2>
+
+<p>Picture a line \(OA\) lying along the positive x-axis. Rotate it anticlockwise about \(O\) until it becomes a new line \(OP\). The angle swept out, \(\theta\), is the <strong>general angle</strong> — it can be anything at all: \(200°\), \(480°\), \(-150°\). The <strong>basic angle</strong> \(\alpha\) is always the acute angle that \(OP\) makes with the x-axis — the "shadow" of \(\theta\) back onto the nearest part of the axis.</p>
+
+<div class="box formula">
+  <span class="lab">Definition for any angle</span>
+  \[ \sin\theta = \frac{y}{r} \qquad \cos\theta = \frac{x}{r} \qquad \tan\theta = \frac{y}{x} \]
+  <p style="margin:.4em 0 0">where \(P(x,y)\) lies on \(OP\) and \(r=OP>0\). This works even for obtuse, reflex, or negative angles — no right-angled triangle required.</p>
+</div>
+
+<h3 id="p1-special">1.0 Special values — memorise these cold</h3>
+<div class="box formula">
+  <span class="lab">The five you actually memorise</span>
+  <table class="ref" style="margin:8px 0 0">
+    <tr><th>\(\theta\)</th><th>\(0°\)</th><th>\(30°\)</th><th>\(45°\)</th><th>\(60°\)</th><th>\(90°\)</th></tr>
+    <tr><td>radians</td><td>\(0\)</td><td>\(\tfrac{\pi}{6}\)</td><td>\(\tfrac{\pi}{4}\)</td><td>\(\tfrac{\pi}{3}\)</td><td>\(\tfrac{\pi}{2}\)</td></tr>
+    <tr><td>\(\sin\theta\)</td><td>\(0\)</td><td>\(\tfrac12\)</td><td>\(\tfrac{\sqrt2}{2}\)</td><td>\(\tfrac{\sqrt3}{2}\)</td><td>\(1\)</td></tr>
+    <tr><td>\(\cos\theta\)</td><td>\(1\)</td><td>\(\tfrac{\sqrt3}{2}\)</td><td>\(\tfrac{\sqrt2}{2}\)</td><td>\(\tfrac12\)</td><td>\(0\)</td></tr>
+    <tr><td>\(\tan\theta\)</td><td>\(0\)</td><td>\(\tfrac{\sqrt3}{3}\)</td><td>\(1\)</td><td>\(\sqrt3\)</td><td>undefined</td></tr>
+  </table>
+  <p style="margin:.6em 0 0">Everything else in the table below is <strong>not</strong> extra memorising — it's these same five values, relocated by the basic-angle method (§1.1) and given a sign by ASTC (§1.1). Notice \(\sin\) and \(\cos\) are mirror images of each other across \(45°\); if you forget one, swap \(\sin\leftrightarrow\cos\) and use \(30°\leftrightarrow60°\).</p>
+</div>
+
+<div class="box formula">
+  <span class="lab">The full unit circle, all four quadrants (degrees ↔ radians)</span>
+  <table class="ref" style="margin:8px 0 0">
+    <tr><th>\(\theta\)</th><th>\(\sin\theta\)</th><th>\(\cos\theta\)</th><th>\(\tan\theta\)</th></tr>
+    <tr><td>\(0°=0\)</td><td>\(0\)</td><td>\(1\)</td><td>\(0\)</td></tr>
+    <tr><td>\(30°=\tfrac{\pi}{6}\)</td><td>\(\tfrac12\)</td><td>\(\tfrac{\sqrt3}{2}\)</td><td>\(\tfrac{\sqrt3}{3}\)</td></tr>
+    <tr><td>\(45°=\tfrac{\pi}{4}\)</td><td>\(\tfrac{\sqrt2}{2}\)</td><td>\(\tfrac{\sqrt2}{2}\)</td><td>\(1\)</td></tr>
+    <tr><td>\(60°=\tfrac{\pi}{3}\)</td><td>\(\tfrac{\sqrt3}{2}\)</td><td>\(\tfrac12\)</td><td>\(\sqrt3\)</td></tr>
+    <tr><td>\(90°=\tfrac{\pi}{2}\)</td><td>\(1\)</td><td>\(0\)</td><td>undefined</td></tr>
+    <tr><td>\(120°=\tfrac{2\pi}{3}\)</td><td>\(\tfrac{\sqrt3}{2}\)</td><td>\(-\tfrac12\)</td><td>\(-\sqrt3\)</td></tr>
+    <tr><td>\(135°=\tfrac{3\pi}{4}\)</td><td>\(\tfrac{\sqrt2}{2}\)</td><td>\(-\tfrac{\sqrt2}{2}\)</td><td>\(-1\)</td></tr>
+    <tr><td>\(150°=\tfrac{5\pi}{6}\)</td><td>\(\tfrac12\)</td><td>\(-\tfrac{\sqrt3}{2}\)</td><td>\(-\tfrac{\sqrt3}{3}\)</td></tr>
+    <tr><td>\(180°=\pi\)</td><td>\(0\)</td><td>\(-1\)</td><td>\(0\)</td></tr>
+    <tr><td>\(210°=\tfrac{7\pi}{6}\)</td><td>\(-\tfrac12\)</td><td>\(-\tfrac{\sqrt3}{2}\)</td><td>\(\tfrac{\sqrt3}{3}\)</td></tr>
+    <tr><td>\(225°=\tfrac{5\pi}{4}\)</td><td>\(-\tfrac{\sqrt2}{2}\)</td><td>\(-\tfrac{\sqrt2}{2}\)</td><td>\(1\)</td></tr>
+    <tr><td>\(240°=\tfrac{4\pi}{3}\)</td><td>\(-\tfrac{\sqrt3}{2}\)</td><td>\(-\tfrac12\)</td><td>\(\sqrt3\)</td></tr>
+    <tr><td>\(270°=\tfrac{3\pi}{2}\)</td><td>\(-1\)</td><td>\(0\)</td><td>undefined</td></tr>
+    <tr><td>\(300°=\tfrac{5\pi}{3}\)</td><td>\(-\tfrac{\sqrt3}{2}\)</td><td>\(\tfrac12\)</td><td>\(-\sqrt3\)</td></tr>
+    <tr><td>\(315°=\tfrac{7\pi}{4}\)</td><td>\(-\tfrac{\sqrt2}{2}\)</td><td>\(\tfrac{\sqrt2}{2}\)</td><td>\(-1\)</td></tr>
+    <tr><td>\(330°=\tfrac{11\pi}{6}\)</td><td>\(-\tfrac12\)</td><td>\(\tfrac{\sqrt3}{2}\)</td><td>\(-\tfrac{\sqrt3}{3}\)</td></tr>
+    <tr><td>\(360°=2\pi\)</td><td>\(0\)</td><td>\(1\)</td><td>\(0\)</td></tr>
+  </table>
+</div>
+
+<div class="tip box"><span class="lab">How to memorise this without memorising 51 numbers</span>Don't memorise the big table — memorise the 5-column table above, plus ASTC (§1.1), plus the basic-angle formula (§1.1). Every row below \(90°\) is just one of those five values with a sign stapled on. Test yourself with the generator at the end of this section until reconstructing any row takes under 10 seconds.</div>
+
+<h3 id="p1-astc">1.1 Basic angle by quadrant, and the ASTC sign rule</h3>
+<div class="box method">
+  <span class="lab">Basic angle formula</span>
+  <ol class="steps">
+    <li>Quadrant 1 (\(0°\)–\(90°\)): \(\alpha=\theta\)</li>
+    <li>Quadrant 2 (\(90°\)–\(180°\)): \(\alpha=180°-\theta\)</li>
+    <li>Quadrant 3 (\(180°\)–\(270°\)): \(\alpha=\theta-180°\)</li>
+    <li>Quadrant 4 (\(270°\)–\(360°\)): \(\alpha=360°-\theta\)</li>
+  </ol>
+</div>
+<p>Since \(r>0\) always, only \(x\) and \(y\) change sign — so the sign of each ratio depends purely on the quadrant:</p>
+<table class="ref">
+<tr><th>Quadrant</th><th>\(\sin\theta\)</th><th>\(\cos\theta\)</th><th>\(\tan\theta\)</th><th>Positive ratio</th></tr>
+<tr><td>1 (\(0°\)–\(90°\))</td><td>+</td><td>+</td><td>+</td><td><strong>A</strong>ll</td></tr>
+<tr><td>2 (\(90°\)–\(180°\))</td><td>+</td><td>−</td><td>−</td><td><strong>S</strong>ine</td></tr>
+<tr><td>3 (\(180°\)–\(270°\))</td><td>−</td><td>−</td><td>+</td><td><strong>T</strong>angent</td></tr>
+<tr><td>4 (\(270°\)–\(360°\))</td><td>−</td><td>+</td><td>−</td><td><strong>C</strong>osine</td></tr>
+</table>
+
+<h3 id="p1-negative">1.2 Negative angles</h3>
+<p>A negative angle is measured <em>clockwise</em> from the positive x-axis instead. Reflecting \(P\) across the x-axis flips the sign of \(y\) only, which gives:</p>
+<div class="box formula">
+  <span class="lab">Negative-angle rules</span>
+  \[ \sin(-\theta)=-\sin\theta \qquad \cos(-\theta)=\cos\theta \qquad \tan(-\theta)=-\tan\theta \]
+  <p style="margin:.4em 0 0">Cosine is <strong>even</strong>; sine and tangent are <strong>odd</strong>. The reciprocal ratios inherit the same parity: \(\sec\) is even, \(\operatorname{cosec}\) and \(\cot\) are odd.</p>
+</div>
+
+<span class="interactive-tag">Try it before you look</span>
+<div class="reveal-box" id="rv-p1">
+  <span class="lab">Worked example — combining ASTC with a negative angle</span>
+  <p>Evaluate \(\tan 300° \times \cos(-150°)\) without a calculator.</p>
+  <textarea class="try-first" placeholder="Jot your own attempt, then reveal the steps..."></textarea>
+  <div class="reveal-step" data-n="1"><span class="num">1</span><span>\(\tan300°\): \(300°\) is in Quadrant 4 (\(270°\)–\(360°\)), where tan is negative. Basic angle \(=360°-300°=60°\), so \(\tan300°=-\tan60°=-\sqrt3\).</span></div>
+  <div class="reveal-step" data-n="2"><span class="num">2</span><span>\(\cos(-150°)\): cosine is even, so \(\cos(-150°)=\cos150°\). \(150°\) is Quadrant 2, basic angle \(=180°-150°=30°\), cos negative there: \(\cos150°=-\cos30°=-\tfrac{\sqrt3}{2}\).</span></div>
+  <div class="reveal-step" data-n="3"><span class="num">3</span><span>Multiply the two results: \((-\sqrt3)\times\left(-\tfrac{\sqrt3}{2}\right)=\dfrac{\sqrt3\times\sqrt3}{2}=\dfrac{3}{2}\).</span></div>
+  <div class="reveal-step" data-n="4"><span class="num">4</span><span>Answer: \(\dfrac{3}{2}\).</span></div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="revealNext('rv-p1')">Show next step</button>
+    <button class="btn secondary" onclick="revealAll('rv-p1')">Show all</button>
+    <button class="btn secondary" onclick="revealReset('rv-p1')">Reset</button>
+  </div>
+</div>
+
+<div class="warn box"><span class="lab">Common trap</span>Never read the quadrant off an angle bigger than \(360°\) (or smaller than \(0°\)) directly. \(\sin750°\) is <em>not</em> evaluated at \(750°\) — reduce it first: \(750°-720°=30°\), then proceed as normal.</div>
+
+<span class="interactive-tag">Self-check</span>
+<div id="quiz-p1" class="quiz-host"></div>
+
+<span class="interactive-tag">Practice generator — new problem each click</span>
+<div class="gen-box">
+  <p style="font-family:Inter,sans-serif;font-size:13px;color:var(--ink-soft);margin-top:0">
+    Evaluate a trig ratio of a general angle (possibly negative or beyond \(360°\)) without a calculator.
+  </p>
+  <div class="gen-problem" id="gen-eval-problem">Loading…</div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="genEvalReveal()">Reveal solution</button>
+    <button class="btn secondary" onclick="genEvalNew()">New problem</button>
+  </div>
+  <div class="gen-solution" id="gen-eval-solution"></div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 2 -->
+<!-- ============================================================ -->
+<section id="p2">
+<h2 class="part"><span class="n">§2</span> Reciprocal &amp; Complementary Ratios</h2>
+
+<div class="box formula">
+  <span class="lab">Reciprocal ratios</span>
+  \[ \operatorname{cosec}\theta=\frac{1}{\sin\theta} \qquad \sec\theta=\frac{1}{\cos\theta} \qquad \cot\theta=\frac{1}{\tan\theta}=\frac{\cos\theta}{\sin\theta} \]
+  <p style="margin:.4em 0 0">Each one's sign follows automatically from the ratio it's the reciprocal of — \(\operatorname{cosec}\theta\) is positive exactly when \(\sin\theta\) is positive.</p>
+</div>
+
+<div class="box formula">
+  <span class="lab">Complementary angles</span>
+  \[ \sin(90°-\theta)=\cos\theta \qquad \cos(90°-\theta)=\sin\theta \qquad \tan(90°-\theta)=\cot\theta \]
+  <p style="margin:.4em 0 0">True for any general angle \(\theta\), not just acute ones — the "co-" in cosine literally means "sine of the complement."</p>
+</div>
+
+<span class="interactive-tag">Try it before you look</span>
+<div class="reveal-box" id="rv-p2">
+  <span class="lab">Worked example — one given ratio, several asked for</span>
+  <p>Given \(\tan A=-\tfrac{5}{12}\) with \(A\) in Quadrant 2, find \(\sec A\) and \(\cos(90°-A)\).</p>
+  <textarea class="try-first" placeholder="Jot your own attempt, then reveal the steps..."></textarea>
+  <div class="reveal-step" data-n="1"><span class="num">1</span><span>Ignore the sign and build a right triangle from the magnitude \(\tfrac{5}{12}\): this is a 5-12-13 triangle, so the hypotenuse is \(13\).</span></div>
+  <div class="reveal-step" data-n="2"><span class="num">2</span><span>In Quadrant 2, cosine is negative: \(\cos A=-\tfrac{12}{13}\), so \(\sec A=\dfrac{1}{\cos A}=-\dfrac{13}{12}\).</span></div>
+  <div class="reveal-step" data-n="3"><span class="num">3</span><span>\(\cos(90°-A)=\sin A\) by the complementary rule. In Quadrant 2, sine is positive: \(\sin A=\tfrac{5}{13}\).</span></div>
+  <div class="reveal-step" data-n="4"><span class="num">4</span><span>Final answers: \(\sec A=-\dfrac{13}{12}\), \(\cos(90°-A)=\dfrac{5}{13}\).</span></div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="revealNext('rv-p2')">Show next step</button>
+    <button class="btn secondary" onclick="revealAll('rv-p2')">Show all</button>
+    <button class="btn secondary" onclick="revealReset('rv-p2')">Reset</button>
+  </div>
+</div>
+
+<div class="tip box"><span class="lab">Key insight</span>Reciprocal ratios inherit their odd/even behaviour from the ratio they came from: \(\operatorname{cosec}\) is odd (like \(\sin\)), \(\sec\) is even (like \(\cos\)), \(\cot\) is odd (like \(\tan\)).</div>
+
+<span class="interactive-tag">Self-check</span>
+<div id="quiz-p2" class="quiz-host"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3 -->
+<!-- ============================================================ -->
+<section id="p3">
+<h2 class="part"><span class="n">§3</span> Fundamental (Pythagorean) Identities</h2>
+
+<p>Take a right triangle with legs \(a,b\), hypotenuse \(c\), angle \(\theta\) opposite \(a\). Pythagoras gives \(a^2+b^2=c^2\); dividing through by \(c^2\), then by \(b^2\), then by \(a^2\), produces all three identities below.</p>
+
+<div class="box formula">
+  <span class="lab">The three Pythagorean identities</span>
+  \[ \sin^2\theta+\cos^2\theta=1 \qquad \sec^2\theta=1+\tan^2\theta \qquad \operatorname{cosec}^2\theta=1+\cot^2\theta \]
+  <p style="margin:.4em 0 0">True for <strong>every</strong> angle \(\theta\). Know every rearrangement too — e.g. \(\sin^2\theta=1-\cos^2\theta\), \(\tan^2\theta=\sec^2\theta-1\) — because you'll need whichever one fits the question.</p>
+</div>
+
+<div class="box method">
+  <span class="lab">Method — proving an identity</span>
+  <ol class="steps">
+    <li>Start on the side that looks <em>more complicated</em> (more terms, fractions, mixed angles). You rarely touch the simpler side.</li>
+    <li>Expand brackets, combine fractions over a common denominator, or factorise.</li>
+    <li>Substitute a Pythagorean identity wherever you see \(\sin^2+\cos^2\), \(\sec^2-\tan^2\), or \(\operatorname{cosec}^2-\cot^2\) — they always collapse to \(1\).</li>
+    <li>If stuck, rewrite everything in terms of \(\sin\) and \(\cos\) only.</li>
+  </ol>
+</div>
+
+<span class="interactive-tag">Try it before you look</span>
+<div class="reveal-box" id="rv-p3">
+  <span class="lab">Worked example — proving an identity</span>
+  <p>Prove that \(\sec x-\cos x\equiv \sin x\tan x\).</p>
+  <textarea class="try-first" placeholder="Jot your own attempt, then reveal the steps..."></textarea>
+  <div class="reveal-step" data-n="1"><span class="num">1</span><span>Start from the LHS (two unlike terms vs. a single product on the RHS): \(\sec x-\cos x=\dfrac{1}{\cos x}-\cos x\).</span></div>
+  <div class="reveal-step" data-n="2"><span class="num">2</span><span>Combine over a common denominator: \(=\dfrac{1-\cos^2x}{\cos x}\).</span></div>
+  <div class="reveal-step" data-n="3"><span class="num">3</span><span>Substitute the Pythagorean identity \(1-\cos^2x=\sin^2x\): \(=\dfrac{\sin^2x}{\cos x}=\sin x\cdot\dfrac{\sin x}{\cos x}\).</span></div>
+  <div class="reveal-step" data-n="4"><span class="num">4</span><span>\(=\sin x\tan x\), which is the RHS. \(\checkmark\)</span></div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="revealNext('rv-p3')">Show next step</button>
+    <button class="btn secondary" onclick="revealAll('rv-p3')">Show all</button>
+    <button class="btn secondary" onclick="revealReset('rv-p3')">Reset</button>
+  </div>
+</div>
+
+<div class="tip box"><span class="lab">Reusable trick</span>Given \(\sin A\pm\cos A=k\), squaring both sides unlocks \(\sin A\cos A\) via \(\sin^2+\cos^2=1\). Given \(\sec A+\tan A=k\), pair it with \((\sec A-\tan A)(\sec A+\tan A)=1\) and add/subtract the two equations to solve for \(\sec A\) and \(\tan A\) separately.</div>
+
+<span class="interactive-tag">Self-check</span>
+<div id="quiz-p3" class="quiz-host"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4 -->
+<!-- ============================================================ -->
+<section id="p4">
+<h2 class="part"><span class="n">§4</span> Solving Equations with Identities</h2>
+
+<div class="box method">
+  <span class="lab">Method</span>
+  <ol class="steps">
+    <li>Spot which functions are mixed, and pick a Pythagorean identity that converts one into the other.</li>
+    <li>Substitute and simplify into a polynomial equation in <em>one</em> function.</li>
+    <li>Solve that polynomial (factorise, or use the quadratic formula).</li>
+    <li>Reject any value outside that function's valid range — remember \(|\sec x|\ge1\) and \(|\operatorname{cosec}x|\ge1\) always, and \(-1\le\sin x,\cos x\le1\).</li>
+    <li>For each remaining value, find <em>every</em> angle in the given domain — check degrees vs radians, and don't miss the endpoints.</li>
+  </ol>
+</div>
+
+<span class="interactive-tag">Try it before you look</span>
+<div class="reveal-box" id="rv-p4">
+  <span class="lab">Worked example — full equation solve</span>
+  <p>Solve \(2\tan^2x-3\sec x+3=0\) for \(0\le x\le2\pi\).</p>
+  <textarea class="try-first" placeholder="Jot your own attempt, then reveal the steps..."></textarea>
+  <div class="reveal-step" data-n="1"><span class="num">1</span><span>Both \(\tan\) and \(\sec\) appear — use \(\tan^2x=\sec^2x-1\): \(2(\sec^2x-1)-3\sec x+3=0\).</span></div>
+  <div class="reveal-step" data-n="2"><span class="num">2</span><span>Simplify to a quadratic in \(\sec x\): \(2\sec^2x-3\sec x+1=0\).</span></div>
+  <div class="reveal-step" data-n="3"><span class="num">3</span><span>Factorise: \((2\sec x-1)(\sec x-1)=0 \Rightarrow \sec x=\tfrac12\) or \(\sec x=1\).</span></div>
+  <div class="reveal-step" data-n="4"><span class="num">4</span><span>Reject \(\sec x=\tfrac12\) — impossible, since \(|\sec x|\ge1\) always. Keep \(\sec x=1\Rightarrow\cos x=1\).</span></div>
+  <div class="reveal-step" data-n="5"><span class="num">5</span><span>In \([0,2\pi]\), \(\cos x=1\) at both ends of the domain: \(x=0,\ 2\pi\).</span></div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="revealNext('rv-p4')">Show next step</button>
+    <button class="btn secondary" onclick="revealAll('rv-p4')">Show all</button>
+    <button class="btn secondary" onclick="revealReset('rv-p4')">Reset</button>
+  </div>
+</div>
+
+<div class="tip box"><span class="lab">Key insight</span>Seeing \(\sec^2x\) and \(\tan x\) together (or \(\operatorname{cosec}^2x\) and \(\cot x\)) is always your cue to substitute a Pythagorean identity and collapse to one function.</div>
+
+<span class="interactive-tag">Self-check</span>
+<div id="quiz-p4" class="quiz-host"></div>
+
+<span class="interactive-tag">Practice generator — new problem each click</span>
+<div class="gen-box">
+  <p style="font-family:Inter,sans-serif;font-size:13px;color:var(--ink-soft);margin-top:0">
+    Solve a quadratic-in-\(\sin x\) equation for \(0°\le x\le360°\).
+  </p>
+  <div class="gen-problem" id="gen-quad-problem">Loading…</div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="genQuadReveal()">Reveal solution</button>
+    <button class="btn secondary" onclick="genQuadNew()">New problem</button>
+  </div>
+  <div class="gen-solution" id="gen-quad-solution"></div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5 -->
+<!-- ============================================================ -->
+<section id="p5">
+<h2 class="part"><span class="n">§5</span> Addition Formulae</h2>
+
+<div class="box formula">
+  <span class="lab">The addition formulae</span>
+  \[ \sin(A\pm B)=\sin A\cos B\pm\cos A\sin B \]
+  \[ \cos(A\pm B)=\cos A\cos B\mp\sin A\sin B \]
+  \[ \tan(A\pm B)=\dfrac{\tan A\pm\tan B}{1\mp\tan A\tan B} \]
+  <p style="margin:.4em 0 0">Watch the cosine formula's sign — it <strong>flips</strong> relative to the left-hand side.</p>
+</div>
+
+<div class="warn box"><span class="lab">Common trap</span>\(\sin(A+B)\ne\sin A+\sin B\). Trig functions never distribute over addition — always expand using the full formula.</div>
+
+<h3 id="p5-surds">5.1 Evaluating surds like \(\tan285°\)</h3>
+<div class="box method">
+  <span class="lab">Method</span>
+  <ol class="steps">
+    <li>Split the angle into a sum/difference of two special angles from \(\{30°,45°,60°,\dots\}\).</li>
+    <li>Apply the relevant addition formula.</li>
+    <li>Substitute special-angle values, using ASTC for any component beyond \(0°\)–\(90°\).</li>
+    <li>Simplify the surd.</li>
+  </ol>
+</div>
+
+<span class="interactive-tag">Try it before you look</span>
+<div class="reveal-box" id="rv-p5">
+  <span class="lab">Worked example — surd-form evaluation</span>
+  <p>Express \(\tan285°\) in surd form.</p>
+  <textarea class="try-first" placeholder="Jot your own attempt, then reveal the steps..."></textarea>
+  <div class="reveal-step" data-n="1"><span class="num">1</span><span>Split: \(285°=240°+45°\), so \(\tan285°=\dfrac{\tan240°+\tan45°}{1-\tan240°\tan45°}\).</span></div>
+  <div class="reveal-step" data-n="2"><span class="num">2</span><span>\(\tan240°\): Quadrant 3, basic angle \(60°\), tan positive there: \(\tan240°=\tan60°=\sqrt3\).</span></div>
+  <div class="reveal-step" data-n="3"><span class="num">3</span><span>Substitute: \(\tan285°=\dfrac{\sqrt3+1}{1-\sqrt3}\).</span></div>
+  <div class="reveal-step" data-n="4"><span class="num">4</span><span>Rationalise by multiplying by \(\dfrac{1+\sqrt3}{1+\sqrt3}\): \(\dfrac{(\sqrt3+1)(1+\sqrt3)}{(1-\sqrt3)(1+\sqrt3)}=\dfrac{4+2\sqrt3}{-2}=-2-\sqrt3\).</span></div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="revealNext('rv-p5')">Show next step</button>
+    <button class="btn secondary" onclick="revealAll('rv-p5')">Show all</button>
+    <button class="btn secondary" onclick="revealReset('rv-p5')">Reset</button>
+  </div>
+</div>
+
+<span class="interactive-tag">Self-check</span>
+<div id="quiz-p5" class="quiz-host"></div>
+
+<span class="interactive-tag">Practice generator — new problem each click</span>
+<div class="gen-box">
+  <p style="font-family:Inter,sans-serif;font-size:13px;color:var(--ink-soft);margin-top:0">
+    Evaluate an exact (surd-form) trig ratio of a compound angle using the addition formula.
+  </p>
+  <div class="gen-problem" id="gen-add-problem">Loading…</div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="genAddReveal()">Reveal solution</button>
+    <button class="btn secondary" onclick="genAddNew()">New problem</button>
+  </div>
+  <div class="gen-solution" id="gen-add-solution"></div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 6 -->
+<!-- ============================================================ -->
+<section id="p6">
+<h2 class="part"><span class="n">§6</span> Quadrants, Compound Ratios &amp; Proofs</h2>
+
+<p>Two very common question shapes: (a) you're given ratios of \(A\) and \(B\) plus a combined range, and asked for a compound ratio like \(\cos(A-B)\); (b) you're asked to prove an identity built from addition formulae.</p>
+
+<span class="interactive-tag">Try it before you look</span>
+<div class="reveal-box" id="rv-p6">
+  <span class="lab">Worked example — quadrant work + addition formulae</span>
+  <p>Given \(\sin A=\tfrac35\), \(\sin B=\tfrac{5}{13}\), both \(A\) and \(B\) between \(90°\) and \(270°\), find \(\cos(A-B)\) and \(\tan(A+B)\).</p>
+  <textarea class="try-first" placeholder="Jot your own attempt, then reveal the steps..."></textarea>
+  <div class="reveal-step" data-n="1"><span class="num">1</span><span>The range \(90°\)–\(270°\) spans Q2 and Q3. Since both sines are positive, and sin is only positive in Q2 within that range, <strong>both angles are in Q2</strong> — so cosine is negative for both.</span></div>
+  <div class="reveal-step" data-n="2"><span class="num">2</span><span>3-4-5 triangle: \(\cos A=-\tfrac45\). 5-12-13 triangle: \(\cos B=-\tfrac{12}{13}\).</span></div>
+  <div class="reveal-step" data-n="3"><span class="num">3</span><span>\(\cos(A-B)=\cos A\cos B+\sin A\sin B=\left(-\tfrac45\right)\left(-\tfrac{12}{13}\right)+\tfrac35\cdot\tfrac5{13}=\tfrac{48}{65}+\tfrac{15}{65}=\tfrac{63}{65}\).</span></div>
+  <div class="reveal-step" data-n="4"><span class="num">4</span><span>\(\tan A=-\tfrac34\), \(\tan B=-\tfrac5{12}\). Then \(\tan(A+B)=\dfrac{\tan A+\tan B}{1-\tan A\tan B}=\dfrac{-\tfrac9{12}-\tfrac5{12}}{1-\tfrac{15}{48}}=-\dfrac{56}{33}\).</span></div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="revealNext('rv-p6')">Show next step</button>
+    <button class="btn secondary" onclick="revealAll('rv-p6')">Show all</button>
+    <button class="btn secondary" onclick="revealReset('rv-p6')">Reset</button>
+  </div>
+</div>
+
+<div class="tip box"><span class="lab">Key insight</span>Given two ratios plus a combined range, always pin down the exact quadrant for each angle using every piece of given information <em>together</em> before assigning any signs — not one clue at a time.</div>
+
+<span class="interactive-tag">Self-check</span>
+<div id="quiz-p6" class="quiz-host"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 7 -->
+<!-- ============================================================ -->
+<section id="p7">
+<h2 class="part"><span class="n">§7</span> R-Formulae</h2>
+
+<p>An expression like \(2\sin x+3\cos x\) is a sum of two waves — but it always simplifies into a <strong>single</strong> wave \(R\sin(x+\alpha)\) with a new amplitude \(R\) and a phase shift \(\alpha\).</p>
+
+<div class="box method">
+  <span class="lab">Derivation — compare coefficients</span>
+  <p>Suppose \(a\sin\theta+b\cos\theta\equiv R\sin(\theta+\alpha)\). Expand the right side: \(R\sin\theta\cos\alpha+R\cos\theta\sin\alpha\). Comparing coefficients: \(R\cos\alpha=a\), \(R\sin\alpha=b\). Divide to get \(\tan\alpha=\tfrac{b}{a}\); square and add to get \(R=\sqrt{a^2+b^2}\).</p>
+</div>
+
+<div class="box formula">
+  <span class="lab">The four R-formula cases (\(a,b>0\), \(R=\sqrt{a^2+b^2}\), \(\tan\alpha=b/a\), \(\alpha\) acute)</span>
+  \[ a\sin\theta+b\cos\theta=R\sin(\theta+\alpha) \qquad a\sin\theta-b\cos\theta=R\sin(\theta-\alpha) \]
+  \[ a\cos\theta+b\sin\theta=R\cos(\theta-\alpha) \qquad a\cos\theta-b\sin\theta=R\cos(\theta+\alpha) \]
+</div>
+
+<span class="interactive-tag">Try it before you look</span>
+<div class="reveal-box" id="rv-p7">
+  <span class="lab">Worked example — R-formula from scratch</span>
+  <p>Express \(7\sin\theta-24\cos\theta\) as a single trig function.</p>
+  <textarea class="try-first" placeholder="Jot your own attempt, then reveal the steps..."></textarea>
+  <div class="reveal-step" data-n="1"><span class="num">1</span><span>Pattern is \(a\sin\theta-b\cos\theta\), so the form is \(R\sin(\theta-\alpha)\), with \(a=7,\ b=24\).</span></div>
+  <div class="reveal-step" data-n="2"><span class="num">2</span><span>\(R=\sqrt{7^2+24^2}=\sqrt{625}=25\).</span></div>
+  <div class="reveal-step" data-n="3"><span class="num">3</span><span>\(\tan\alpha=\dfrac{24}{7}\Rightarrow\alpha\approx73.7°\).</span></div>
+  <div class="reveal-step" data-n="4"><span class="num">4</span><span>Answer: \(7\sin\theta-24\cos\theta=25\sin(\theta-73.7°)\).</span></div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="revealNext('rv-p7')">Show next step</button>
+    <button class="btn secondary" onclick="revealAll('rv-p7')">Show all</button>
+    <button class="btn secondary" onclick="revealReset('rv-p7')">Reset</button>
+  </div>
+</div>
+
+<div class="warn box"><span class="lab">Common trap</span>Keep \(\alpha\) acute by insisting \(a,b>0\) before you start — this keeps the reference triangle in Quadrant 1, the easiest case for computing \(\tan\alpha\) and \(R\).</div>
+
+<span class="interactive-tag">Self-check</span>
+<div id="quiz-p7" class="quiz-host"></div>
+
+<span class="interactive-tag">Practice generator — new problem each click</span>
+<div class="gen-box">
+  <p style="font-family:Inter,sans-serif;font-size:13px;color:var(--ink-soft);margin-top:0">
+    Express \(a\sin\theta\pm b\cos\theta\) (or the cosine version) in R-form.
+  </p>
+  <div class="gen-problem" id="gen-r-problem">Loading…</div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="genRReveal()">Reveal solution</button>
+    <button class="btn secondary" onclick="genRNew()">New problem</button>
+  </div>
+  <div class="gen-solution" id="gen-r-solution"></div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 8 -->
+<!-- ============================================================ -->
+<section id="p8">
+<h2 class="part"><span class="n">§8</span> Applications of R-Formulae</h2>
+
+<div class="box method">
+  <span class="lab">Method — solving \(a\sin\theta\pm b\cos\theta=c\)</span>
+  <ol class="steps">
+    <li>Convert the left side into R-form.</li>
+    <li>You now have \(R\sin(\theta+\alpha)=c\), i.e. \(\sin(\theta+\alpha)=c/R\).</li>
+    <li>Solve for \((\theta+\alpha)\) — remember to shift the <em>domain</em> by \(\alpha\) too, since \((\theta+\alpha)\) ranges over a different interval than \(\theta\) does.</li>
+    <li>Subtract \(\alpha\) back off each solution, and discard anything outside the original domain.</li>
+  </ol>
+</div>
+
+<span class="interactive-tag">Try it before you look</span>
+<div class="reveal-box" id="rv-p8">
+  <span class="lab">Worked example — solving with R-form</span>
+  <p>Solve \(8\sin x+\sqrt3\cos x=5\) for \(0°\le x\le360°\).</p>
+  <textarea class="try-first" placeholder="Jot your own attempt, then reveal the steps..."></textarea>
+  <div class="reveal-step" data-n="1"><span class="num">1</span><span>\(R=\sqrt{64+3}=\sqrt{67}\approx8.185\), \(\tan\alpha=\tfrac{\sqrt3}{8}\Rightarrow\alpha\approx12.2°\). So the equation becomes \(\sqrt{67}\sin(x+12.2°)=5\).</span></div>
+  <div class="reveal-step" data-n="2"><span class="num">2</span><span>\(\sin(x+12.2°)=\dfrac{5}{\sqrt{67}}\approx0.611\). Since \(x\in[0°,360°]\), \((x+12.2°)\in[12.2°,372.2°]\).</span></div>
+  <div class="reveal-step" data-n="3"><span class="num">3</span><span>Basic angle for \(\sin(\cdot)=0.611\) is \(\approx37.7°\), giving \((x+12.2°)=37.7°\) or \(180°-37.7°=142.3°\) within range.</span></div>
+  <div class="reveal-step" data-n="4"><span class="num">4</span><span>Subtract \(12.2°\) back off: \(x\approx25.5°\) or \(x\approx130.1°\).</span></div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="revealNext('rv-p8')">Show next step</button>
+    <button class="btn secondary" onclick="revealAll('rv-p8')">Show all</button>
+    <button class="btn secondary" onclick="revealReset('rv-p8')">Reset</button>
+  </div>
+</div>
+
+<div class="box formula">
+  <span class="lab">Maximum / minimum values</span>
+  <p>Because \(-1\le\sin(\cdot)\le1\) always, once written as \(R\sin(\theta+\alpha)\), the <strong>maximum</strong> is \(R\) (when \(\sin(\cdot)=1\)) and the <strong>minimum</strong> is \(-R\) (when \(\sin(\cdot)=-1\)) — no calculus needed.</p>
+</div>
+
+<div class="tip box"><span class="lab">Key insight</span>Squaring a range that straddles zero, like \([-R,R]\), gives a new minimum of \(0\) — not \(R^2\) — because the original expression passes through zero somewhere in the domain. An odd power like cubing, by contrast, keeps the max and min in the same order.</div>
+
+<span class="interactive-tag">Self-check</span>
+<div id="quiz-p8" class="quiz-host"></div>
+
+<span class="interactive-tag">Practice generator — new problem each click</span>
+<div class="gen-box">
+  <p style="font-family:Inter,sans-serif;font-size:13px;color:var(--ink-soft);margin-top:0">
+    Find the maximum and minimum of \(k\pm(a\sin\theta\pm b\cos\theta)\) using R-form.
+  </p>
+  <div class="gen-problem" id="gen-mm-problem">Loading…</div>
+  <div class="reveal-controls">
+    <button class="btn" onclick="genMmReveal()">Reveal solution</button>
+    <button class="btn secondary" onclick="genMmNew()">New problem</button>
+  </div>
+  <div class="gen-solution" id="gen-mm-solution"></div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CHEAT-SHEET -->
+<!-- ============================================================ -->
+<section id="pcheat">
+<h2 class="part"><span class="n">§9</span> Exam cheat-sheet</h2>
+
+<div class="box formula">
+  <span class="lab">Every formula, in one place</span>
+  \[ \sin(-\theta)=-\sin\theta,\quad \cos(-\theta)=\cos\theta,\quad \tan(-\theta)=-\tan\theta \]
+  \[ \sin(90°-\theta)=\cos\theta,\quad \cos(90°-\theta)=\sin\theta,\quad \tan(90°-\theta)=\cot\theta \]
+  \[ \sin^2\theta+\cos^2\theta=1,\quad \sec^2\theta=1+\tan^2\theta,\quad \operatorname{cosec}^2\theta=1+\cot^2\theta \]
+  \[ \sin(A\pm B)=\sin A\cos B\pm\cos A\sin B \]
+  \[ \cos(A\pm B)=\cos A\cos B\mp\sin A\sin B \]
+  \[ \tan(A\pm B)=\dfrac{\tan A\pm\tan B}{1\mp\tan A\tan B} \]
+  \[ a\sin\theta+b\cos\theta=R\sin(\theta+\alpha),\quad a\sin\theta-b\cos\theta=R\sin(\theta-\alpha) \]
+  \[ a\cos\theta+b\sin\theta=R\cos(\theta-\alpha),\quad a\cos\theta-b\sin\theta=R\cos(\theta+\alpha) \]
+  <p style="margin:.4em 0 0">where \(R=\sqrt{a^2+b^2}\), \(\tan\alpha=b/a\), \(\alpha\) acute, \(a,b>0\).</p>
+</div>
+
+<span class="interactive-tag" id="flashcards-anchor">Formula flashcards</span>
+<div class="flash-wrap">
+  <div class="flashcard" id="flashcard" onclick="flipCard()">
+    <div class="flash-inner" id="flash-inner">
+      <div class="flash-face front" id="flash-front"></div>
+      <div class="flash-face back" id="flash-back"></div>
+    </div>
+  </div>
+  <div class="flash-hint">Click the card to flip it</div>
+  <div class="flash-controls">
+    <button class="btn secondary" onclick="flashPrev()">← Previous</button>
+    <span id="flash-counter">1 / N</span>
+    <button class="btn secondary" onclick="flashNext()">Next →</button>
+  </div>
+</div>
+
+<span class="interactive-tag" id="mistake-anchor">Spot the mistake</span>
+<div class="mistake-deck" id="mistake-deck">
+  <p style="font-family:Inter,sans-serif;font-size:13px;color:var(--ink-soft);margin-top:0">
+    Each statement is either a valid rule or a common misconception. Decide before revealing.
+  </p>
+  <div class="mistake-stmt" id="mistake-stmt">Loading…</div>
+  <div class="tf-btns">
+    <button class="tf-btn" id="mistake-true" onclick="mistakeAnswer(true)">TRUE</button>
+    <button class="tf-btn" id="mistake-false" onclick="mistakeAnswer(false)">FALSE</button>
+  </div>
+  <div class="mistake-fb" id="mistake-fb"></div>
+  <div class="mistake-nav">
+    <button class="btn secondary" id="mistake-next" onclick="mistakeNext()" disabled>Next →</button>
+  </div>
+</div>
+
+<h4>What method do I use?</h4>
+<table class="ref">
+<tr><th>If the question looks like…</th><th>Do this</th></tr>
+<tr><td>"Evaluate without a calculator", angle possibly negative or \(>360°\)</td><td>Reduce → quadrant → ASTC sign → basic angle (§1)</td></tr>
+<tr><td>"Prove" / uses the \(\equiv\) symbol</td><td>Start on the more complicated side; look for \(\sin^2+\cos^2\) patterns (§3), or expand compound angles (§5)</td></tr>
+<tr><td>Equation mixes \(\sec^2,\tan^2\) (or \(\operatorname{cosec}^2,\cot^2\))</td><td>Substitute a Pythagorean identity, reduce to one function (§4)</td></tr>
+<tr><td>Equation has a compound angle like \(\sin(x+30°)\)</td><td>Expand with the addition formula first, then simplify (§5)</td></tr>
+<tr><td>Equation looks like \(a\sin\theta\pm b\cos\theta=c\), \(c\ne0\)</td><td>Convert to R-form first (§8)</td></tr>
+<tr><td>Same equation but \(c=0\)</td><td>No R-formula needed — divide by \(\cos\theta\) to get \(\tan\theta=\)… directly</td></tr>
+<tr><td>Asks for a maximum/minimum value</td><td>R-form: max is \(R\), min is \(-R\) (§8)</td></tr>
+<tr><td>Given one ratio + a quadrant/range, asks for others</td><td>Build the right triangle, pin the quadrant, convert (§2, §6)</td></tr>
+</table>
+
+<ul class="checklist">
+  <li>Reduce every angle into \(0°\)–\(360°\) before reading off the quadrant.</li>
+  <li>Never let \(\sin(A+B)=\sin A+\sin B\) sneak into your working.</li>
+  <li>Reject any \(\sec x\) or \(\operatorname{cosec} x\) root with magnitude less than \(1\).</li>
+  <li>After R-form, remember to shift the solution range by \(\alpha\) — and shift back at the end.</li>
+</ul>
+
+<hr class="soft">
+<p style="font-family:'Inter',sans-serif;font-size:13px;color:var(--ink-soft)">
+  Built from Worksheets 1, 4 and 5 (Trig Ratios, Fundamental Identities, Addition Formulae &amp; R-Formulae). Work the generators and mixed review with pen and paper.
+</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- MIXED FINAL REVIEW -->
+<!-- ============================================================ -->
+<section id="pmix">
+<h2 class="part"><span class="n">§10</span> Mixed final review</h2>
+<p>Questions from every section, shuffled. In a real exam you don't get told which method to use — this practises that recognition skill.</p>
+<div style="margin:14px 0"><button class="btn secondary" onclick="reshuffleMixed()">↻ Shuffle a new mix</button></div>
+<div id="quiz-mixed" class="quiz-host"></div>
+</section>
+
+</main>
+</div>
+
+<script>
+/* KaTeX init */
+var KATEX_DELIMITERS = [
+  {left:"\\[", right:"\\]", display:true},
+  {left:"\\(", right:"\\)", display:false}
+];
+function reMath(el){
+  if (!el || !window.renderMathInElement) return;
+  try { renderMathInElement(el, {delimiters:KATEX_DELIMITERS, throwOnError:false}); } catch(e){}
+}
+
+/* ---------- 1. TOC toggle + in-page scroll ---------- */
+function toggleToc(forceOpen){
+  var nav = document.getElementById('toc-nav');
+  var backdrop = document.getElementById('toc-backdrop');
+  var willOpen = (typeof forceOpen === 'boolean') ? forceOpen : !nav.classList.contains('open');
+  nav.classList.toggle('open', willOpen);
+  backdrop.classList.toggle('show', willOpen);
+}
+function initTocLinks(){
+  document.querySelectorAll('nav.toc a[href^="#"]').forEach(function(link){
+    link.addEventListener('click', function(evt){
+      evt.preventDefault();
+      var id = link.getAttribute('href').slice(1);
+      var target = document.getElementById(id);
+      if (target){
+        toggleToc(false);
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+        history.replaceState(null, '', '#' + id);
+      }
+    });
+  });
+}
+
+/* ---------- 2. Step-reveal boxes ---------- */
+function revealNext(id){
+  var box = document.getElementById(id);
+  var steps = box.querySelectorAll('.reveal-step');
+  for (var i=0; i<steps.length; i++){
+    if (!steps[i].classList.contains('shown')){
+      steps[i].classList.add('shown');
+      reMath(steps[i]);
+      break;
+    }
+  }
+}
+function revealAll(id){
+  var box = document.getElementById(id);
+  box.querySelectorAll('.reveal-step').forEach(function(s){ s.classList.add('shown'); });
+  reMath(box);
+}
+function revealReset(id){
+  var box = document.getElementById(id);
+  box.querySelectorAll('.reveal-step').forEach(function(s){ s.classList.remove('shown'); });
+  var ta = box.querySelector('.try-first');
+  if (ta) ta.value = '';
+}
+
+/* ---------- 3. Quiz system ---------- */
+function initQuizzes(){
+  Object.keys(QUIZ_DATA).forEach(function(hostId){
+    var host = document.getElementById(hostId);
+    if (!host) return;
+    renderQuiz(host, QUIZ_DATA[hostId]);
+  });
+}
+function renderQuiz(host, questions){
+  var idx = 0;
+  function renderQ(){
+    host.innerHTML = '';
+    var q = questions[idx];
+    var block = document.createElement('div');
+    block.className = 'quiz-block';
+    var qEl = document.createElement('div');
+    qEl.className = 'quiz-q';
+    qEl.innerHTML = 'Q' + (idx+1) + '. ' + q.q;
+    block.appendChild(qEl);
+    var opts = document.createElement('div');
+    opts.className = 'quiz-opts';
+    var fb = document.createElement('div');
+    fb.className = 'quiz-fb';
+    q.opts.forEach(function(optText, i){
+      var b = document.createElement('button');
+      b.className = 'quiz-opt';
+      b.innerHTML = optText;
+      b.onclick = function(){
+        opts.querySelectorAll('.quiz-opt').forEach(function(bt){ bt.classList.add('locked'); });
+        if (i === q.correct){
+          b.classList.add('correct');
+          fb.className = 'quiz-fb show good';
+          fb.innerHTML = 'Correct — ' + q.explain;
+        } else {
+          b.classList.add('incorrect');
+          opts.querySelectorAll('.quiz-opt')[q.correct].classList.add('correct');
+          fb.className = 'quiz-fb show bad';
+          fb.innerHTML = 'Not quite — ' + q.explain;
+        }
+        reMath(block);
+      };
+      opts.appendChild(b);
+    });
+    block.appendChild(opts);
+    block.appendChild(fb);
+    var nav = document.createElement('div');
+    nav.className = 'quiz-nav';
+    var label = document.createElement('span');
+    label.textContent = 'Question ' + (idx+1) + ' of ' + questions.length;
+    nav.appendChild(label);
+    if (idx < questions.length - 1){
+      var nextBtn = document.createElement('button');
+      nextBtn.className = 'btn secondary';
+      nextBtn.textContent = 'Next question →';
+      nextBtn.onclick = function(){ idx++; renderQ(); };
+      nav.appendChild(nextBtn);
+    } else {
+      var restartBtn = document.createElement('button');
+      restartBtn.className = 'btn secondary';
+      restartBtn.textContent = '↺ Restart';
+      restartBtn.onclick = function(){ idx = 0; renderQ(); };
+      nav.appendChild(restartBtn);
+    }
+    block.appendChild(nav);
+    host.appendChild(block);
+    reMath(block);
+  }
+  renderQ();
+}
+
+/* ---------- 4. Mixed final review ---------- */
+function shuffleArray(arr){
+  var a = arr.slice();
+  for (var i = a.length-1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i+1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+function initMixedReview(){
+  var host = document.getElementById('quiz-mixed');
+  if (!host) return;
+  var all = [];
+  Object.keys(QUIZ_DATA).forEach(function(k){ all = all.concat(QUIZ_DATA[k]); });
+  all = all.concat(EXTRA_REVIEW_QUESTIONS);
+  renderQuiz(host, shuffleArray(all));
+}
+function reshuffleMixed(){ initMixedReview(); }
+
+/* ---------- 5. Spot-the-mistake cards ---------- */
+var mIdx = 0, mAnswered = false;
+function initMistakeDeck(){ mIdx = 0; mAnswered = false; showMistakeCard(); }
+function showMistakeCard(){
+  var c = MISTAKE_CARDS[mIdx];
+  document.getElementById('mistake-stmt').innerHTML = '\\(' + c.stmt + '\\)';
+  document.getElementById('mistake-fb').className = 'mistake-fb';
+  document.getElementById('mistake-fb').innerHTML = '';
+  document.getElementById('mistake-true').disabled = false;
+  document.getElementById('mistake-false').disabled = false;
+  document.getElementById('mistake-next').disabled = true;
+  mAnswered = false;
+  reMath(document.getElementById('mistake-deck'));
+}
+function mistakeAnswer(guess){
+  if (mAnswered) return;
+  mAnswered = true;
+  var c = MISTAKE_CARDS[mIdx];
+  var correct = (guess === c.truth);
+  var fb = document.getElementById('mistake-fb');
+  fb.className = 'mistake-fb show ' + (correct ? 'good' : 'bad');
+  fb.innerHTML = (correct ? 'Correct. ' : 'Actually ' + (c.truth ? 'TRUE' : 'FALSE') + '. ') + c.explain;
+  document.getElementById('mistake-true').disabled = true;
+  document.getElementById('mistake-false').disabled = true;
+  document.getElementById('mistake-next').disabled = false;
+  reMath(document.getElementById('mistake-deck'));
+}
+function mistakeNext(){
+  mIdx = (mIdx + 1) % MISTAKE_CARDS.length;
+  showMistakeCard();
+}
+
+/* ---------- 6. Flashcards ---------- */
+var fIdx = 0;
+function initFlashcards(){ fIdx = 0; renderFlashcard(); }
+function renderFlashcard(){
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('flash-front').innerHTML =
+    '<span class="flash-content">' + FLASHCARDS[fIdx].front + '</span>';
+  document.getElementById('flash-back').innerHTML =
+    '<span class="flash-content">' + FLASHCARDS[fIdx].back + '</span>';
+  document.getElementById('flash-counter').textContent =
+    (fIdx+1) + ' / ' + FLASHCARDS.length;
+  reMath(document.getElementById('flashcard'));
+}
+function flipCard(){ document.getElementById('flashcard').classList.toggle('flipped'); }
+function flashNext(){ fIdx = (fIdx+1) % FLASHCARDS.length; renderFlashcard(); }
+function flashPrev(){ fIdx = (fIdx-1+FLASHCARDS.length) % FLASHCARDS.length; renderFlashcard(); }
+
+/* ==================================================================== */
+/* GENERATOR 1 (§1) — evaluate a trig ratio of a general angle          */
+/* ==================================================================== */
+var BASE30 = [0,30,60,90,120,150,180,210,240,270,300,330];
+var VAL30 = {
+  0:   {sin:'0', cos:'1', tan:'0', sinD:0, cosD:1, tanD:0},
+  30:  {sin:'\\tfrac12', cos:'\\tfrac{\\sqrt3}{2}', tan:'\\tfrac{\\sqrt3}{3}', sinD:0.5, cosD:0.8660254, tanD:0.5773503},
+  60:  {sin:'\\tfrac{\\sqrt3}{2}', cos:'\\tfrac12', tan:'\\sqrt3', sinD:0.8660254, cosD:0.5, tanD:1.7320508},
+  90:  {sin:'1', cos:'0', tan:'\\text{undefined}', sinD:1, cosD:0, tanD:null},
+  120: {sin:'\\tfrac{\\sqrt3}{2}', cos:'-\\tfrac12', tan:'-\\sqrt3', sinD:0.8660254, cosD:-0.5, tanD:-1.7320508},
+  150: {sin:'\\tfrac12', cos:'-\\tfrac{\\sqrt3}{2}', tan:'-\\tfrac{\\sqrt3}{3}', sinD:0.5, cosD:-0.8660254, tanD:-0.5773503},
+  180: {sin:'0', cos:'-1', tan:'0', sinD:0, cosD:-1, tanD:0},
+  210: {sin:'-\\tfrac12', cos:'-\\tfrac{\\sqrt3}{2}', tan:'\\tfrac{\\sqrt3}{3}', sinD:-0.5, cosD:-0.8660254, tanD:0.5773503},
+  240: {sin:'-\\tfrac{\\sqrt3}{2}', cos:'-\\tfrac12', tan:'\\sqrt3', sinD:-0.8660254, cosD:-0.5, tanD:1.7320508},
+  270: {sin:'-1', cos:'0', tan:'\\text{undefined}', sinD:-1, cosD:0, tanD:null},
+  300: {sin:'-\\tfrac{\\sqrt3}{2}', cos:'\\tfrac12', tan:'-\\sqrt3', sinD:-0.8660254, cosD:0.5, tanD:-1.7320508},
+  330: {sin:'-\\tfrac12', cos:'\\tfrac{\\sqrt3}{2}', tan:'-\\tfrac{\\sqrt3}{3}', sinD:-0.5, cosD:0.8660254, tanD:-0.5773503}
+};
+function basicAngleAndQuadrant(a){
+  var r = ((a % 360) + 360) % 360;
+  var q, alpha;
+  if (r <= 90){ q = 1; alpha = r; }
+  else if (r <= 180){ q = 2; alpha = 180 - r; }
+  else if (r <= 270){ q = 3; alpha = r - 180; }
+  else { q = 4; alpha = 360 - r; }
+  return {reduced:r, quadrant:q, alpha:alpha};
+}
+var genEvalCurrent = null;
+function makeEvalProblem(){
+  var funcs = ['sin','cos','tan'];
+  var base, func;
+  do {
+    base = BASE30[Math.floor(Math.random()*BASE30.length)];
+    func = funcs[Math.floor(Math.random()*funcs.length)];
+  } while (func === 'tan' && (base === 90 || base === 270));
+  var shiftOptions = [0, 360, -360, 720];
+  var shift = shiftOptions[Math.floor(Math.random()*shiftOptions.length)];
+  var angle = base + shift;
+  // occasionally present as a negative coterminal angle instead
+  if (Math.random() < 0.35 && shift === 0 && base !== 0){
+    angle = base - 360;
+  }
+  var info = basicAngleAndQuadrant(angle);
+  return { angle:angle, func:func, base:base, answerTex: VAL30[base][func], info:info };
+}
+function initGenEval(){ genEvalCurrent = makeEvalProblem(); renderGenEval(); }
+function genEvalNew(){ genEvalCurrent = makeEvalProblem(); renderGenEval(); }
+function renderGenEval(){
+  var g = genEvalCurrent;
+  var funcName = {sin:'\\sin', cos:'\\cos', tan:'\\tan'}[g.func];
+  document.getElementById('gen-eval-problem').innerHTML =
+    'Evaluate \\(' + funcName + '(' + g.angle + '°)\\) without a calculator.';
+  document.getElementById('gen-eval-solution').className = 'gen-solution';
+  document.getElementById('gen-eval-solution').innerHTML = '';
+  reMath(document.getElementById('gen-eval-problem'));
+}
+function genEvalReveal(){
+  var g = genEvalCurrent;
+  var funcName = {sin:'\\sin', cos:'\\cos', tan:'\\tan'}[g.func];
+  var signWord = (g.answerTex.charAt(0) === '-') ? 'negative' : (g.answerTex === '0' ? 'zero' : 'positive');
+  var sol = document.getElementById('gen-eval-solution');
+  sol.className = 'gen-solution show';
+  sol.innerHTML =
+    '<div class="work">Reduced angle: ' + g.info.reduced + '° (Quadrant ' + g.info.quadrant + '). Basic angle = ' + g.info.alpha + '°. ' + funcName + ' is ' + signWord + ' in Quadrant ' + g.info.quadrant + '.</div>' +
+    '<p style="margin-top:8px">\\(' + funcName + '(' + g.angle + '°) = ' + funcName + '(' + g.info.alpha + '°) \\times (\\text{sign}) = ' + g.answerTex + '\\)</p>';
+  reMath(sol);
+}
+
+/* ==================================================================== */
+/* GENERATOR 2 (§4) — quadratic-in-sin(x) equation                      */
+/* ==================================================================== */
+var SIN_KEYS = [-1,-0.5,0,0.5,1];
+var SIN_SOLS = {
+  '-1':  [270],
+  '-0.5':[210,330],
+  '0':   [0,180],
+  '0.5': [30,150],
+  '1':   [90]
+};
+function fmtK(k){
+  if (k === -1) return '-1';
+  if (k === -0.5) return '-\\tfrac12';
+  if (k === 0) return '0';
+  if (k === 0.5) return '\\tfrac12';
+  if (k === 1) return '1';
+}
+var genQuadCurrent = null;
+function makeQuadProblem(){
+  var k1 = SIN_KEYS[Math.floor(Math.random()*SIN_KEYS.length)];
+  var k2;
+  do { k2 = SIN_KEYS[Math.floor(Math.random()*SIN_KEYS.length)]; } while (k2 === k1);
+  var B = -4*(k1+k2);   // coefficient of sin x
+  var C = 4*k1*k2;      // constant
+  var solutions = SIN_SOLS[String(k1)].concat(SIN_SOLS[String(k2)]).sort(function(a,b){return a-b;});
+  return { k1:k1, k2:k2, B:B, C:C, solutions:solutions };
+}
+function eqString(B, C){
+  var s = '4\\sin^2x';
+  if (B !== 0){ s += (B > 0 ? '+' : '-') + Math.abs(B) + '\\sin x'; }
+  if (C !== 0){ s += (C > 0 ? '+' : '-') + Math.abs(C); }
+  s += '=0';
+  return s;
+}
+function initGenQuad(){ genQuadCurrent = makeQuadProblem(); renderGenQuad(); }
+function genQuadNew(){ genQuadCurrent = makeQuadProblem(); renderGenQuad(); }
+function renderGenQuad(){
+  var g = genQuadCurrent;
+  document.getElementById('gen-quad-problem').innerHTML =
+    'Solve \\(' + eqString(g.B, g.C) + '\\) for \\(0°\\le x\\le360°\\).';
+  document.getElementById('gen-quad-solution').className = 'gen-solution';
+  document.getElementById('gen-quad-solution').innerHTML = '';
+  reMath(document.getElementById('gen-quad-problem'));
+}
+function genQuadReveal(){
+  var g = genQuadCurrent;
+  var sol = document.getElementById('gen-quad-solution');
+  sol.className = 'gen-solution show';
+  sol.innerHTML =
+    '<div class="work">Let \\(s=\\sin x\\). \\(4s^2' + (g.B>=0?'+':'-') + Math.abs(g.B) + 's' + (g.C>=0?'+':'-') + Math.abs(g.C) + '=0\\) factors to give \\(\\sin x=' + fmtK(g.k1) + '\\) or \\(\\sin x=' + fmtK(g.k2) + '\\).</div>' +
+    '<p style="margin-top:8px">\\(x = ' + g.solutions.join('°,\\ ') + '°\\)</p>';
+  reMath(sol);
+}
+
+/* ==================================================================== */
+/* GENERATOR 3 (§5) — exact value of a compound-angle ratio             */
+/* ==================================================================== */
+var ADD_POOL = [
+  { display:'\\cos15°', A:'45°', B:'30°', op:'-', funcName:'\\cos', workFunc:'\\cos(45°-30°)=\\cos45°\\cos30°+\\sin45°\\sin30°', answer:'\\dfrac{\\sqrt6+\\sqrt2}{4}' },
+  { display:'\\sin75°', A:'45°', B:'30°', op:'+', funcName:'\\sin', workFunc:'\\sin(45°+30°)=\\sin45°\\cos30°+\\cos45°\\sin30°', answer:'\\dfrac{\\sqrt6+\\sqrt2}{4}' },
+  { display:'\\cos105°', A:'60°', B:'45°', op:'+', funcName:'\\cos', workFunc:'\\cos(60°+45°)=\\cos60°\\cos45°-\\sin60°\\sin45°', answer:'\\dfrac{\\sqrt2-\\sqrt6}{4}' },
+  { display:'\\sin195°', A:'150°', B:'45°', op:'+', funcName:'\\sin', workFunc:'\\sin(150°+45°)=\\sin150°\\cos45°+\\cos150°\\sin45°', answer:'\\dfrac{\\sqrt2-\\sqrt6}{4}' },
+  { display:'\\tan285°', A:'240°', B:'45°', op:'+', funcName:'\\tan', workFunc:'\\tan(240°+45°)=\\dfrac{\\tan240°+\\tan45°}{1-\\tan240°\\tan45°}', answer:'-2-\\sqrt3' }
+];
+var genAddCurrent = null;
+function initGenAdd(){ genAddCurrent = ADD_POOL[Math.floor(Math.random()*ADD_POOL.length)]; renderGenAdd(); }
+function genAddNew(){
+  var next;
+  do { next = ADD_POOL[Math.floor(Math.random()*ADD_POOL.length)]; } while (ADD_POOL.length > 1 && next === genAddCurrent);
+  genAddCurrent = next;
+  renderGenAdd();
+}
+function renderGenAdd(){
+  var g = genAddCurrent;
+  document.getElementById('gen-add-problem').innerHTML =
+    'Express \\(' + g.display + '\\) in surd form.';
+  document.getElementById('gen-add-solution').className = 'gen-solution';
+  document.getElementById('gen-add-solution').innerHTML = '';
+  reMath(document.getElementById('gen-add-problem'));
+}
+function genAddReveal(){
+  var g = genAddCurrent;
+  var sol = document.getElementById('gen-add-solution');
+  sol.className = 'gen-solution show';
+  sol.innerHTML =
+    '<div class="work">Split as \\(' + g.A + g.op + g.B + '\\): \\(' + g.workFunc + '\\).</div>' +
+    '<p style="margin-top:8px">\\(' + g.display + ' = ' + g.answer + '\\)</p>';
+  reMath(sol);
+}
+
+/* ==================================================================== */
+/* GENERATOR 4 (§7) — express a sinθ ± b cosθ in R-form                 */
+/* ==================================================================== */
+var TRIPLES = [[3,4,5],[6,8,10],[5,12,13],[8,15,17],[7,24,25],[9,12,15],[20,21,29]];
+var R_CASES = [
+  { key:'sin+cos', lhs:function(a,b){return 'a\\sin\\theta+b\\cos\\theta';}, rhsForm:'R\\sin(\\theta+\\alpha)' },
+  { key:'sin-cos', lhs:function(a,b){return 'a\\sin\\theta-b\\cos\\theta';}, rhsForm:'R\\sin(\\theta-\\alpha)' },
+  { key:'cos+sin', lhs:function(a,b){return 'a\\cos\\theta+b\\sin\\theta';}, rhsForm:'R\\cos(\\theta-\\alpha)' },
+  { key:'cos-sin', lhs:function(a,b){return 'a\\cos\\theta-b\\sin\\theta';}, rhsForm:'R\\cos(\\theta+\\alpha)' }
+];
+var genRCurrent = null;
+function makeRProblem(){
+  var t = TRIPLES[Math.floor(Math.random()*TRIPLES.length)];
+  var a = t[0], b = t[1], R = t[2];
+  if (Math.random() < 0.5){ var tmp = a; a = b; b = tmp; } // vary which leg is a vs b
+  var c = R_CASES[Math.floor(Math.random()*R_CASES.length)];
+  var alpha = Math.atan(b/a) * 180 / Math.PI;
+  var lhsTex = c.lhs(a,b).replace(/^a/, a).replace(/b/, b);
+  // build literal expression string
+  var expr;
+  if (c.key === 'sin+cos') expr = a + '\\sin\\theta+' + b + '\\cos\\theta';
+  else if (c.key === 'sin-cos') expr = a + '\\sin\\theta-' + b + '\\cos\\theta';
+  else if (c.key === 'cos+sin') expr = a + '\\cos\\theta+' + b + '\\sin\\theta';
+  else expr = a + '\\cos\\theta-' + b + '\\sin\\theta';
+  var rhsFunc = (c.key.indexOf('sin') === 0) ? '\\sin' : '\\cos';
+  var rhsSign = (c.key === 'sin+cos' || c.key === 'cos-sin') ? '+' : '-';
+  return { a:a, b:b, R:R, alpha:alpha, expr:expr, rhsFunc:rhsFunc, rhsSign:rhsSign };
+}
+function initGenR(){ genRCurrent = makeRProblem(); renderGenR(); }
+function genRNew(){ genRCurrent = makeRProblem(); renderGenR(); }
+function renderGenR(){
+  var g = genRCurrent;
+  document.getElementById('gen-r-problem').innerHTML =
+    'Express \\(' + g.expr + '\\) as a single trig function \\(R' + g.rhsFunc + '(\\theta' + g.rhsSign + '\\alpha)\\).';
+  document.getElementById('gen-r-solution').className = 'gen-solution';
+  document.getElementById('gen-r-solution').innerHTML = '';
+  reMath(document.getElementById('gen-r-problem'));
+}
+function genRReveal(){
+  var g = genRCurrent;
+  var sol = document.getElementById('gen-r-solution');
+  sol.className = 'gen-solution show';
+  sol.innerHTML =
+    '<div class="work">\\(R=\\sqrt{' + g.a + '^2+' + g.b + '^2}=' + g.R + '\\). \\(\\tan\\alpha=\\dfrac{' + g.b + '}{' + g.a + '}\\Rightarrow\\alpha\\approx' + g.alpha.toFixed(1) + '°\\).</div>' +
+    '<p style="margin-top:8px">\\(' + g.expr + ' = ' + g.R + g.rhsFunc + '(\\theta' + g.rhsSign + g.alpha.toFixed(1) + '°)\\)</p>';
+  reMath(sol);
+}
+
+/* ==================================================================== */
+/* GENERATOR 5 (§8) — max/min of k ± (a sinθ ± b cosθ)                  */
+/* ==================================================================== */
+var genMmCurrent = null;
+function makeMmProblem(){
+  var t = TRIPLES[Math.floor(Math.random()*TRIPLES.length)];
+  var a = t[0], b = t[1], R = t[2];
+  if (Math.random() < 0.5){ var tmp = a; a = b; b = tmp; }
+  var k = 1 + Math.floor(Math.random()*20);
+  var sign2 = Math.random() < 0.5 ? '+' : '-';
+  var expr = k + (sign2 === '+' ? '+' : '-') + '(' + a + '\\sin\\theta+' + b + '\\cos\\theta)';
+  var max = k + R;
+  var min = k - R;
+  return { a:a, b:b, R:R, k:k, sign2:sign2, expr:expr, max:max, min:min };
+}
+function initGenMm(){ genMmCurrent = makeMmProblem(); renderGenMm(); }
+function genMmNew(){ genMmCurrent = makeMmProblem(); renderGenMm(); }
+function renderGenMm(){
+  var g = genMmCurrent;
+  document.getElementById('gen-mm-problem').innerHTML =
+    'Find the maximum and minimum values of \\(' + g.expr + '\\).';
+  document.getElementById('gen-mm-solution').className = 'gen-solution';
+  document.getElementById('gen-mm-solution').innerHTML = '';
+  reMath(document.getElementById('gen-mm-problem'));
+}
+function genMmReveal(){
+  var g = genMmCurrent;
+  var sol = document.getElementById('gen-mm-solution');
+  sol.className = 'gen-solution show';
+  sol.innerHTML =
+    '<div class="work">\\(R=\\sqrt{' + g.a + '^2+' + g.b + '^2}=' + g.R + '\\), so \\(' + g.a + '\\sin\\theta+' + g.b + '\\cos\\theta\\) ranges over \\([-' + g.R + ',' + g.R + ']\\). ' + (g.sign2==='-'?'Subtracting it flips the range but not its width.':'') + '</div>' +
+    '<p style="margin-top:8px">Max \\(=' + g.max + '\\), Min \\(=' + g.min + '\\)</p>';
+  reMath(sol);
+}
+
+/* ==================================================================== */
+/* DATA: quizzes, mistakes, flashcards                                  */
+/* ==================================================================== */
+var QUIZ_DATA = {
+  'quiz-p1': [
+    { q:"Which quadrant is \\(\\theta=200°\\) in?", opts:["Quadrant 1","Quadrant 2","Quadrant 3","Quadrant 4"], correct:2, explain:"\\(200°\\) lies between \\(180°\\) and \\(270°\\), which is Quadrant 3." },
+    { q:"What is the basic angle of \\(\\theta=-150°\\)?", opts:["\\(30°\\)","\\(60°\\)","\\(150°\\)","\\(210°\\)"], correct:0, explain:"First reduce: \\(-150°+360°=210°\\), Quadrant 3. Basic angle \\(=210°-180°=30°\\)." },
+    { q:"Using ASTC, what is the sign of \\(\\tan250°\\)?", opts:["Positive","Negative","Zero","Undefined"], correct:0, explain:"\\(250°\\) is in Quadrant 3 (\\(180°\\)–\\(270°\\)), where tangent is positive." },
+    { q:"Evaluate \\(\\cos(-60°)\\) without a calculator.", opts:["\\(\\tfrac12\\)","\\(-\\tfrac12\\)","\\(\\tfrac{\\sqrt3}{2}\\)","\\(-\\tfrac{\\sqrt3}{2}\\)"], correct:0, explain:"Cosine is even: \\(\\cos(-60°)=\\cos60°=\\tfrac12\\)." }
+  ],
+  'quiz-p2': [
+    { q:"If \\(\\sin\\theta=-\\tfrac35\\) and \\(\\theta\\) is in Quadrant 3, what is \\(\\operatorname{cosec}\\theta\\)?", opts:["\\(-\\tfrac53\\)","\\(\\tfrac53\\)","\\(-\\tfrac35\\)","\\(\\tfrac35\\)"], correct:0, explain:"\\(\\operatorname{cosec}\\theta=\\dfrac{1}{\\sin\\theta}=\\dfrac{1}{-3/5}=-\\dfrac53\\)." },
+    { q:"\\(\\cos(90°-\\theta)\\) is equivalent to:", opts:["\\(\\sin\\theta\\)","\\(\\cos\\theta\\)","\\(\\tan\\theta\\)","\\(-\\sin\\theta\\)"], correct:0, explain:"This is the complementary-angle rule: \\(\\cos(90°-\\theta)=\\sin\\theta\\)." },
+    { q:"Which of these is true for all \\(\\theta\\)?", opts:["\\(\\sec\\theta=\\cos\\theta\\)","\\(\\cot(-\\theta)=-\\cot\\theta\\)","\\(\\operatorname{cosec}(-\\theta)=\\operatorname{cosec}\\theta\\)","\\(\\tan(90°-\\theta)=\\tan\\theta\\)"], correct:1, explain:"\\(\\cot\\) is odd (like \\(\\tan\\)), so \\(\\cot(-\\theta)=-\\cot\\theta\\). \\(\\operatorname{cosec}\\) is odd too, not even, and \\(\\tan(90°-\\theta)=\\cot\\theta\\), not \\(\\tan\\theta\\)." }
+  ],
+  'quiz-p3': [
+    { q:"Which expression is always equal to \\(1\\)?", opts:["\\(\\sec^2\\theta-\\tan^2\\theta\\)","\\(\\sec^2\\theta+\\tan^2\\theta\\)","\\(\\sin\\theta+\\cos\\theta\\)","\\(\\tan^2\\theta-\\sec^2\\theta\\)"], correct:0, explain:"From \\(\\sec^2\\theta=1+\\tan^2\\theta\\), rearranging gives \\(\\sec^2\\theta-\\tan^2\\theta=1\\)." },
+    { q:"When proving an identity, the correct first move is to:", opts:["Start from the more complicated side and simplify", "Cross-multiply both sides", "Assume the identity is true and solve for \\(\\theta\\)", "Square both sides immediately"], correct:0, explain:"You're showing two expressions are always equal, not solving for anything — start on the messier side and work it down to match the other." },
+    { q:"Simplify \\(\\dfrac{1-\\cos^2x}{\\sin x}\\).", opts:["\\(\\sin x\\)","\\(\\cos x\\)","\\(1\\)","\\(\\tan x\\)"], correct:0, explain:"\\(1-\\cos^2x=\\sin^2x\\) by the Pythagorean identity, so \\(\\dfrac{\\sin^2x}{\\sin x}=\\sin x\\)." }
+  ],
+  'quiz-p4': [
+    { q:"Solving \\(2\\cos^2x+\\sin x-1=0\\), which substitution helps?", opts:["\\(\\cos^2x=1-\\sin^2x\\)","\\(\\sin^2x=1-\\tan^2x\\)","\\(\\cos x=1-\\sin x\\)","\\(\\tan x=\\sin x-\\cos x\\)"], correct:0, explain:"Substituting \\(\\cos^2x=1-\\sin^2x\\) converts the whole equation into one function, \\(\\sin x\\), giving a solvable quadratic." },
+    { q:"A quadratic in \\(\\sec x\\) gives the root \\(\\sec x=\\tfrac12\\). What should you do?", opts:["Reject it — impossible since \\(|\\sec x|\\ge1\\) always", "Solve \\(\\cos x=\\tfrac12\\) to find \\(x\\)", "It's valid — secant can take any real value", "\\(\\sec x=\\tfrac12\\) means \\(x=60°\\)"], correct:0, explain:"\\(\\sec x=\\tfrac{1}{\\cos x}\\), and since \\(-1\\le\\cos x\\le1\\), \\(\\sec x\\) can never lie strictly between \\(-1\\) and \\(1\\)." },
+    { q:"For \\(0\\le x\\le2\\pi\\), how many solutions does \\(\\cos x=1\\) have?", opts:["\\(1\\)","\\(2\\)","\\(3\\)","\\(0\\)"], correct:1, explain:"\\(\\cos x=1\\) at \\(x=0\\) and \\(x=2\\pi\\) — both endpoints of the domain count." }
+  ],
+  'quiz-p5': [
+    { q:"\\(\\sin(A+B)\\) equals:", opts:["\\(\\sin A+\\sin B\\)","\\(\\sin A\\cos B+\\cos A\\sin B\\)","\\(\\sin A\\cos B-\\cos A\\sin B\\)","\\(\\cos A\\cos B-\\sin A\\sin B\\)"], correct:1, explain:"That's the sine addition formula. The last option is actually \\(\\cos(A+B)\\)." },
+    { q:"\\(\\cos(A-B)\\) equals:", opts:["\\(\\cos A\\cos B+\\sin A\\sin B\\)","\\(\\cos A\\cos B-\\sin A\\sin B\\)","\\(\\sin A\\cos B-\\cos A\\sin B\\)","\\(\\cos A-\\cos B\\)"], correct:0, explain:"The cosine formula's sign flips relative to the left side, so \\(\\cos(A-B)=\\cos A\\cos B+\\sin A\\sin B\\)." },
+    { q:"To evaluate \\(\\tan285°\\) exactly, the best first move is:", opts:["Split it as \\(240°+45°\\) and use the tan addition formula", "Use a calculator", "Split it as \\(285°=200°+85°\\)", "It cannot be found exactly"], correct:0, explain:"\\(240°\\) and \\(45°\\) are both angles you know exact values for, and their sum is \\(285°\\)." }
+  ],
+  'quiz-p6': [
+    { q:"Given \\(\\sin A=\\tfrac35\\) with \\(A\\) between \\(90°\\) and \\(180°\\), \\(\\cos A\\) equals:", opts:["\\(-\\tfrac45\\)","\\(\\tfrac45\\)","\\(-\\tfrac35\\)","\\(\\tfrac35\\)"], correct:0, explain:"Quadrant 2 means cosine is negative; from the 3-4-5 triangle, \\(\\cos A=-\\tfrac45\\)." },
+    { q:"\\(\\cos(A+B)\\cos(A-B)\\) simplifies to:", opts:["\\(\\cos^2A-\\sin^2B\\)","\\(\\cos^2A+\\sin^2B\\)","\\(\\cos2A\\)","\\(\\cos^2A\\cos^2B\\)"], correct:0, explain:"Expanding both brackets gives a difference of squares, \\(\\cos^2A\\cos^2B-\\sin^2A\\sin^2B\\), which reduces to \\(\\cos^2A-\\sin^2B\\) using \\(\\sin^2+\\cos^2=1\\)." },
+    { q:"When given two ratios plus a range like \\(90°<A,B<270°\\), your first step should be:", opts:["Pin down the exact quadrant for each angle using every given clue", "Assume both angles are acute", "Add the two ranges together", "Immediately apply the addition formula without checking signs"], correct:0, explain:"Every sign in the rest of the working depends on knowing the single, exact quadrant each angle sits in." }
+  ],
+  'quiz-p7': [
+    { q:"For \\(a\\sin\\theta+b\\cos\\theta\\), the amplitude \\(R\\) equals:", opts:["\\(\\sqrt{a^2+b^2}\\)","\\(a+b\\)","\\(a^2+b^2\\)","\\(\\sqrt{a^2-b^2}\\)"], correct:0, explain:"Comparing coefficients and using \\(\\sin^2\\alpha+\\cos^2\\alpha=1\\) gives \\(R=\\sqrt{a^2+b^2}\\)." },
+    { q:"\\(a\\cos\\theta-b\\sin\\theta\\) is written in which form?", opts:["\\(R\\cos(\\theta+\\alpha)\\)","\\(R\\cos(\\theta-\\alpha)\\)","\\(R\\sin(\\theta+\\alpha)\\)","\\(R\\sin(\\theta-\\alpha)\\)"], correct:0, explain:"This is the fourth R-formula case: \\(a\\cos\\theta-b\\sin\\theta=R\\cos(\\theta+\\alpha)\\)." },
+    { q:"\\(\\tan\\alpha\\) in the R-formula is defined as:", opts:["\\(\\dfrac{b}{a}\\)","\\(\\dfrac{a}{b}\\)","\\(\\dfrac{R}{a}\\)","\\(ab\\)"], correct:0, explain:"Dividing the two comparison equations \\(R\\sin\\alpha=b\\) and \\(R\\cos\\alpha=a\\) gives \\(\\tan\\alpha=\\dfrac{b}{a}\\)." }
+  ],
+  'quiz-p8': [
+    { q:"The maximum value of \\(R\\sin(\\theta+\\alpha)\\) is:", opts:["\\(R\\)","\\(1\\)","\\(\\alpha\\)","\\(R+\\alpha\\)"], correct:0, explain:"Since \\(\\sin(\\cdot)\\le1\\) always, the maximum of \\(R\\sin(\\cdot)\\) is \\(R\\), reached when \\(\\sin(\\cdot)=1\\)." },
+    { q:"The minimum value of \\(3\\sin\\theta-4\\cos\\theta\\) is:", opts:["\\(-5\\)","\\(-7\\)","\\(-1\\)","\\(0\\)"], correct:0, explain:"\\(R=\\sqrt{3^2+4^2}=5\\), so the expression ranges over \\([-5,5]\\); the minimum is \\(-5\\)." },
+    { q:"For \\((3\\sin\\theta-4\\cos\\theta)^2\\), the minimum value is:", opts:["\\(0\\)","\\(25\\)","\\(-25\\)","\\(5\\)"], correct:0, explain:"The original range \\([-5,5]\\) straddles zero, so squaring gives a new minimum of \\(0\\) — not \\((-5)^2\\) — reached wherever the original expression passes through zero." }
+  ]
+};
+
+var EXTRA_REVIEW_QUESTIONS = [
+  { q:"Given \\(\\sec A+\\tan A=4\\), what is \\(\\sec A-\\tan A\\)?", opts:["\\(\\tfrac14\\)","\\(4\\)","\\(-4\\)","\\(1\\)"], correct:0, explain:"\\((\\sec A-\\tan A)(\\sec A+\\tan A)=1\\), so \\(\\sec A-\\tan A=\\dfrac{1}{4}\\)." },
+  { q:"If \\(\\sin\\theta-\\cos\\theta=\\tfrac14\\), then \\(\\sin\\theta\\cos\\theta\\) equals:", opts:["\\(\\tfrac{15}{32}\\)","\\(\\tfrac{1}{16}\\)","\\(\\tfrac{17}{32}\\)","\\(\\tfrac18\\)"], correct:0, explain:"Squaring both sides: \\(1-2\\sin\\theta\\cos\\theta=\\tfrac{1}{16}\\), so \\(\\sin\\theta\\cos\\theta=\\tfrac{15}{32}\\)." },
+  { q:"A question gives \\(a\\sin\\theta\\pm b\\cos\\theta=0\\) (note: equals zero). The fastest method is:", opts:["Divide both sides by \\(\\cos\\theta\\) to get \\(\\tan\\theta=\\)…", "Convert to R-form first", "Square both sides", "Use the addition formula"], correct:0, explain:"When \\(c=0\\) there's no need for R-form at all — dividing by \\(\\cos\\theta\\) gives \\(\\tan\\theta\\) directly, which is much faster." },
+  { q:"\\(\\cos(60°+\\theta)+\\sin(30°+\\theta)\\) simplifies to:", opts:["\\(\\cos\\theta\\)","\\(2\\cos\\theta\\)","\\(0\\)","\\(\\sin\\theta\\)"], correct:0, explain:"Expanding both with the addition formulae, the \\(\\sin\\theta\\) terms cancel and the \\(\\cos\\theta\\) terms double then halve, leaving \\(\\cos\\theta\\)." },
+  { q:"After converting \\(a\\sin\\theta+b\\cos\\theta=c\\) into \\(R\\sin(\\theta+\\alpha)=c\\), before solving you must:", opts:["Shift the domain of \\(\\theta\\) by \\(\\alpha\\) to get the range for \\((\\theta+\\alpha)\\)", "Divide \\(c\\) by \\(\\alpha\\)", "Ignore \\(\\alpha\\) entirely", "Square both sides"], correct:0, explain:"\\((\\theta+\\alpha)\\) ranges over a shifted interval compared to \\(\\theta\\) — you must search for solutions in that shifted range, then subtract \\(\\alpha\\) back off." }
+];
+
+var MISTAKE_CARDS = [
+  { stmt:"\\sin(A+B) = \\sin A + \\sin B", truth:false, explain:"Trig functions never distribute over addition. The correct expansion is \\(\\sin(A+B)=\\sin A\\cos B+\\cos A\\sin B\\)." },
+  { stmt:"\\sin^2\\theta+\\cos^2\\theta=1", truth:true, explain:"This is the fundamental Pythagorean identity, true for every angle \\(\\theta\\)." },
+  { stmt:"\\cos(-\\theta) = -\\cos\\theta", truth:false, explain:"Cosine is an even function: \\(\\cos(-\\theta)=\\cos\\theta\\), with no sign change. It's sine and tangent that are odd." },
+  { stmt:"\\cos(A-B) = \\cos A\\cos B - \\sin A\\sin B", truth:false, explain:"That expansion is actually \\(\\cos(A+B)\\). The correct formula is \\(\\cos(A-B)=\\cos A\\cos B+\\sin A\\sin B\\) — the sign flips relative to the left side." },
+  { stmt:"\\sec^2\\theta - \\tan^2\\theta = 1", truth:true, explain:"Rearranging \\(\\sec^2\\theta=1+\\tan^2\\theta\\) gives exactly this." },
+  { stmt:"\\tan(A+B) = \\tan A + \\tan B", truth:false, explain:"The correct formula is \\(\\tan(A+B)=\\dfrac{\\tan A+\\tan B}{1-\\tan A\\tan B}\\) — there's a denominator you can't skip." },
+  { stmt:"\\tan(90°-\\theta) = \\cot\\theta", truth:true, explain:"This is the complementary-angle rule for tangent." },
+  { stmt:"\\sin(-210°) = \\sin(210°)", truth:false, explain:"Sine is odd: \\(\\sin(-210°)=-\\sin(210°)\\), not equal to \\(\\sin(210°)\\)." },
+  { stmt:"a\\sin\\theta+b\\cos\\theta = R\\sin(\\theta+\\alpha)\\ \\text{where}\\ R=\\sqrt{a^2+b^2}", truth:true, explain:"This is exactly the first R-formula case, derived by comparing coefficients of \\(\\sin\\theta\\) and \\(\\cos\\theta\\)." },
+  { stmt:"\\sec x = \\tfrac12\\ \\text{has a solution for some real}\\ x", truth:false, explain:"Since \\(|\\sec x|\\ge1\\) whenever it's defined (because \\(|\\cos x|\\le1\\)), \\(\\sec x=\\tfrac12\\) is impossible for any real \\(x\\)." }
+];
+
+var FLASHCARDS = [
+  { front:"General angle in Q2 → basic angle", back:"\\alpha=180°-\\theta" },
+  { front:"ASTC", back:"\\text{Q1 All +, Q2 Sine +, Q3 Tangent +, Q4 Cosine +}" },
+  { front:"\\sin(-\\theta)=?", back:"-\\sin\\theta" },
+  { front:"\\cos(-\\theta)=?", back:"\\cos\\theta" },
+  { front:"\\cos(90°-\\theta)=?", back:"\\sin\\theta" },
+  { front:"\\sin^2\\theta+\\cos^2\\theta=?", back:"1" },
+  { front:"\\sec^2\\theta=?", back:"1+\\tan^2\\theta" },
+  { front:"\\operatorname{cosec}^2\\theta=?", back:"1+\\cot^2\\theta" },
+  { front:"\\sin(A\\pm B)=?", back:"\\sin A\\cos B\\pm\\cos A\\sin B" },
+  { front:"\\cos(A\\pm B)=?", back:"\\cos A\\cos B\\mp\\sin A\\sin B" },
+  { front:"\\tan(A\\pm B)=?", back:"\\dfrac{\\tan A\\pm\\tan B}{1\\mp\\tan A\\tan B}" },
+  { front:"R-formula amplitude", back:"R=\\sqrt{a^2+b^2}" },
+  { front:"R-formula phase angle", back:"\\tan\\alpha=\\dfrac{b}{a}" },
+  { front:"a\\sin\\theta+b\\cos\\theta=?", back:"R\\sin(\\theta+\\alpha)" },
+  { front:"a\\cos\\theta-b\\sin\\theta=?", back:"R\\cos(\\theta+\\alpha)" },
+  { front:"Max of R\\sin(\\theta+\\alpha)", back:"R" }
+];
+
+window.addEventListener('load', function(){
+  reMath(document.body);
+  initQuizzes();
+  initMistakeDeck();
+  initFlashcards();
+  initGenEval();
+  initGenQuad();
+  initGenAdd();
+  initGenR();
+  initGenMm();
+  initTocLinks();
+  initMixedReview();
+});
+</script>
